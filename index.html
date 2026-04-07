@@ -944,9 +944,11 @@ section{position:relative;padding:var(--s20) 0;z-index:2;}
   .act02-right{border-top:1px solid var(--ink-3);}
   .demo-tablet{max-width:100%;}
   .demo-act{padding:var(--s4);}
-  .demo-stage{min-height:auto;}
+  .demo-act.active{position:relative;inset:auto;}
+  .demo-stage{min-height:auto;overflow:visible;}
   .act02-item{grid-template-columns:24px 1fr 50px 70px 24px;font-size:11px;}
   .act02-item-unit{display:none;}
+  .demo-shell{overflow:visible;}
 }
 
 /* ═══ VS COMPETITION TABLE ═══ */
@@ -1203,10 +1205,31 @@ footer::before{
 @media(max-width:640px){.footer-inner{justify-content:center;text-align:center;}}
 
 /* Responsive fine-tuning */
+@media(max-width:768px){
+  /* Demo tabs: scroll horizontal */
+  .demo-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;gap:0;}
+  .demo-tab{flex:none;padding:12px 12px 10px;font-size:10px;letter-spacing:0.06em;white-space:nowrap;}
+  /* Feat mock table overflow */
+  .feat-mock{overflow-x:auto;}
+  /* VS table */
+  .vs-table{font-size:12px;}
+  .vs-table th,.vs-table td{padding:var(--s3) var(--s3);}
+  /* Hero social proof */
+  .hero-social-proof{flex-direction:column;gap:var(--s3);}
+  .hero-sp-dot{display:none;}
+  /* Section headings no overflow */
+  .t-display-lg{word-break:break-word;}
+}
 @media(max-width:480px){
   section{padding:var(--s16) 0;}
   .hero h1{font-size:52px;}
   .hero-stats{gap:var(--s4);}
+  /* Act02 browser compact */
+  .act02-item{grid-template-columns:20px 1fr 40px 60px;font-size:10px;gap:var(--s1);}
+  .act02-item-del{display:none;}
+  .act02-browser-url{font-size:9px;}
+  /* Pricing compact */
+  .price-amount .num{font-size:40px;}
 }
 
 /* Accessibility */
