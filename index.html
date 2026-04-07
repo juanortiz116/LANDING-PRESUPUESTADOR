@@ -1,0 +1,2856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software de Presupuestos para Reformas con IA | OpsPilot — Gratis 30 días</title>
+<meta name="description" content="Crea presupuestos de obras en menos de 15 minutos con IA. Firma digital legal, portal del cliente y control de rentabilidad. Para fontaneros, electricistas y reformistas. Sin permanencia.">
+<meta name="keywords" content="software presupuestos reforma, programa presupuestos construcción, presupuestos fontanería, software obras España, presupuesto digital reforma, firma digital presupuesto, gestión obras software, control costes reforma">
+<meta name="author" content="OpsPilot">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://presupuestador.opspilot.es">
+<meta property="og:title" content="Presupuesta obras en minutos, no en horas — OpsPilot">
+<meta property="og:description" content="Software con IA para profesionales de la reforma. Firma digital, portal del cliente y control de rentabilidad por obra.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="OpsPilot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Software de Presupuestos con IA para Reformas">
+<meta name="twitter:description" content="De visita a presupuesto firmado en 15 minutos. Prueba gratis.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "OpsPilot Presupuestador",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "url": "https://presupuestador.opspilot.es",
+  "description": "Software de presupuestos para profesionales de la reforma con IA integrada, firma digital eIDAS, compatible con BC3, portal del cliente y control de obra completo.",
+  "offers": [
+    { "@type": "Offer", "name": "Básico", "price": "29", "priceCurrency": "EUR" },
+    { "@type": "Offer", "name": "Profesional", "price": "59", "priceCurrency": "EUR" }
+  ],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "47" }
+}
+</script>
+
+<style>
+:root{
+  --ink:#080808; --ink-1:#101010; --ink-2:#181818; --ink-3:#222222; --ink-4:#2E2E2E;
+  --gold:#E8A020; --gold-bright:#F5B842;
+  --gold-dim:rgba(232,160,32,0.10);
+  --gold-glow:rgba(232,160,32,0.20);
+  --gold-border:rgba(232,160,32,0.22);
+  --cream:#F2EDE4; --cream-2:#C8C4BA;
+  --stone:#7A7870; --stone-light:#9E9A92;
+  --go:#16A34A; --go-dim:rgba(22,163,74,0.12); --stop:#DC2626;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px;
+  --s8:32px; --s10:40px; --s12:48px; --s16:64px; --s20:80px; --s24:96px;
+  --display:'Bebas Neue',sans-serif; --body:'DM Sans',sans-serif; --mono:'DM Mono',monospace;
+  --r1:4px; --r2:8px; --r3:12px; --r4:16px; --r5:24px; --r-full:9999px;
+  --t1:150ms ease; --t2:250ms ease; --t3:400ms cubic-bezier(0.16,1,0.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:90px;-webkit-font-smoothing:antialiased;}
+body{
+  font-family:var(--body);background:var(--ink);color:var(--cream);
+  font-weight:400;line-height:1.6;overflow-x:hidden;position:relative;
+}
+
+/* ═══ ISOMETRIC GRID BACKGROUND ═══ */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(30deg,rgba(255,255,255,0.022) 1px,transparent 1px),
+    linear-gradient(-30deg,rgba(255,255,255,0.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);
+  background-size:60px 34px,60px 34px,60px 34px;
+  background-position:0 0,0 0,0 0;
+}
+
+/* ═══ GRAIN CANVAS ═══ */
+#grain{position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:0.028;mix-blend-mode:overlay;}
+
+/* ═══ AMBIENT GLOWS ═══ */
+.amb{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(80px);}
+.amb-1{top:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,0.06),transparent 70%);}
+.amb-2{bottom:-150px;right:-150px;width:400px;height:400px;background:radial-gradient(circle,rgba(232,160,32,0.04),transparent 70%);}
+
+/* ═══ LOADER ═══ */
+#loader{position:fixed;inset:0;z-index:10000;pointer-events:none;}
+#loader-top,#loader-bottom{position:absolute;left:0;right:0;height:50%;background:var(--ink);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;}
+#loader-top{top:0;align-items:flex-end;padding-bottom:4px;}
+#loader-bottom{bottom:0;align-items:flex-start;padding-top:4px;}
+#loader-text{font-family:var(--mono);font-size:14px;letter-spacing:0.5em;color:var(--cream);font-weight:500;}
+#loader-bottom #loader-text{opacity:0;}
+
+/* ═══ CURSOR (FIX 1) ═══ */
+#c,#cf{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;}
+#c{width:6px;height:6px;background:var(--gold);opacity:0.9;}
+#cf{width:32px;height:32px;border:1px solid var(--gold-border);background:transparent;opacity:0.6;}
+@media(hover:none),(max-width:900px){#c,#cf{display:none;}}
+
+/* ═══ TYPOGRAPHY ═══ */
+.t-display-xl{font-family:var(--display);font-size:clamp(72px,10vw,128px);line-height:0.88;letter-spacing:0.01em;}
+.t-display-lg{font-family:var(--display);font-size:clamp(56px,7vw,88px);line-height:0.90;letter-spacing:0.01em;}
+.t-display-md{font-family:var(--display);font-size:clamp(40px,5vw,56px);line-height:0.92;letter-spacing:0.01em;}
+.t-display-sm{font-family:var(--display);font-size:40px;line-height:0.95;letter-spacing:0.01em;}
+.t-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--stone);font-weight:500;}
+.t-body-lg{font-family:var(--body);font-weight:300;font-size:18px;line-height:1.75;}
+.t-body{font-family:var(--body);font-weight:400;font-size:15px;line-height:1.70;}
+.t-body-sm{font-family:var(--body);font-weight:400;font-size:13px;line-height:1.65;color:var(--stone-light);}
+.t-data{font-family:var(--mono);font-weight:500;font-size:13px;}
+.t-data-lg{font-family:var(--mono);font-weight:500;font-size:24px;}
+
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;letter-spacing:0.01em;line-height:0.92;color:var(--cream);}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+strong{font-weight:500;color:var(--cream);}
+.accent{color:var(--gold);}
+.outline{-webkit-text-stroke:1.5px var(--gold);color:transparent;}
+
+/* ═══ CONTAINER / LAYOUT ═══ */
+.wrap{max-width:1320px;margin:0 auto;padding:0 48px;position:relative;z-index:2;}
+@media(max-width:768px){.wrap{padding:0 20px;}}
+
+.section-num{
+  position:absolute;left:16px;top:80px;
+  font-family:var(--mono);font-size:11px;letter-spacing:0.3em;
+  color:var(--stone);writing-mode:vertical-rl;text-orientation:mixed;
+  transform:rotate(180deg);
+}
+@media(max-width:1100px){.section-num{display:none;}}
+
+.eyebrow{
+  display:inline-block;font-family:var(--mono);font-size:11px;
+  text-transform:uppercase;letter-spacing:0.12em;color:var(--stone);
+  margin-bottom:var(--s6);
+}
+.eyebrow::before{content:'— ';color:var(--gold);}
+.eyebrow::after{content:' —';color:var(--gold);}
+
+.section-head{margin-bottom:var(--s16);}
+.section-head h2{margin-top:var(--s4);}
+
+.divider{
+  height:1px;border:0;
+  background:linear-gradient(90deg,transparent,var(--gold-border) 20%,var(--gold-border) 80%,transparent);
+}
+
+/* ═══ BUTTONS ═══ */
+.btn{
+  display:inline-flex;align-items:center;gap:var(--s2);
+  padding:14px 26px;border-radius:var(--r1);
+  font-family:var(--body);font-size:14px;font-weight:600;
+  text-decoration:none;cursor:pointer;
+  transition:all var(--t2);white-space:nowrap;
+  position:relative;
+}
+.btn-primary{background:var(--gold);color:var(--ink);}
+.btn-primary:hover{background:var(--gold-bright);}
+.btn-ghost{background:transparent;color:var(--cream);padding:14px 0;}
+.btn-ghost:hover{color:var(--gold);}
+.btn-ghost svg{color:var(--gold);}
+.btn-outline{
+  background:transparent;color:var(--stone-light);
+  border:1px solid var(--ink-4);padding:13px 25px;
+}
+.btn-outline:hover{border-color:var(--gold-border);color:var(--cream);}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 48px;
+  background:rgba(8,8,8,0);
+  transition:padding var(--t3);
+}
+.nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--s6);}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:0.15em;color:var(--cream);font-weight:500;}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold);animation:pulse 2.2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.55;transform:scale(0.8);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.nav-links{display:flex;gap:var(--s8);list-style:none;}
+.nav-links a{
+  font-size:13px;color:var(--stone-light);font-weight:400;
+  position:relative;padding:4px 0;transition:color var(--t2);
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:right;
+  transition:transform var(--t3);
+}
+.nav-links a:hover{color:var(--cream);}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left;}
+@media(max-width:900px){.nav-links{display:none;}nav{padding:16px 20px;}}
+
+/* ═══ HERO ═══ */
+.hero{
+  position:relative;min-height:100svh;
+  padding:140px 0 80px;overflow:hidden;
+}
+.hero-bg-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(232,160,32,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(232,160,32,0.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 80% 60% at 70% 40%,black,transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 70% 40%,black,transparent 70%);
+}
+.hero-bg-glow{
+  position:absolute;top:-200px;right:-100px;width:700px;height:700px;
+  background:radial-gradient(circle,rgba(232,160,32,0.08),transparent 60%);
+  filter:blur(60px);pointer-events:none;
+}
+.hero-grid{
+  display:grid;grid-template-columns:55% 45%;gap:var(--s12);
+  align-items:center;position:relative;z-index:2;
+}
+.hero-eyebrow{margin-bottom:var(--s5);}
+.hero h1{font-family:var(--display);font-size:clamp(64px,10vw,128px);line-height:0.88;letter-spacing:0.01em;}
+.hero h1 .line{display:block;overflow:hidden;}
+.hero-rule{
+  height:1px;background:var(--gold);width:100%;
+  margin:var(--s8) 0;transform-origin:left center;opacity:0.8;
+}
+.hero-body{color:var(--cream-2);max-width:540px;margin-bottom:var(--s10);}
+.hero-body strong{color:var(--cream);font-weight:500;}
+.hero-cta-group{display:flex;gap:var(--s6);align-items:center;margin-bottom:var(--s12);flex-wrap:wrap;}
+.hero-stats{display:flex;gap:var(--s6);align-items:center;flex-wrap:wrap;}
+.hero-stats-item{display:flex;flex-direction:column;gap:4px;}
+.hero-stats-item .t-body-sm{color:var(--stone);font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}
+.hero-stats-divider{width:1px;height:36px;background:var(--ink-4);}
+
+/* Social proof bar */
+.hero-social-proof{
+  margin-top:var(--s8);padding-top:var(--s6);
+  border-top:1px solid var(--ink-3);
+  display:flex;align-items:center;gap:var(--s6);flex-wrap:wrap;
+}
+.hero-sp-metric{
+  display:flex;align-items:baseline;gap:var(--s2);
+  font-family:var(--mono);font-size:13px;color:var(--stone-light);
+}
+.hero-sp-metric .sp-num{color:var(--cream-2);font-weight:500;}
+.hero-sp-dot{width:3px;height:3px;border-radius:50%;background:var(--stone);flex-shrink:0;}
+
+/* ═══ HERO VISUAL / SCREENS (FIX 3) ═══ */
+.hero-visual{position:relative;height:640px;}
+.hero-visual-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(232,160,32,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(232,160,32,0.04) 1px,transparent 1px);
+  background-size:40px 40px;
+  transform:perspective(900px) rotateX(18deg) translateY(40px);
+  transform-origin:center bottom;
+  mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black,transparent 80%);
+  opacity:0.6;
+}
+.screen{
+  position:absolute;background:var(--ink-1);
+  border:1px solid var(--ink-3);border-radius:var(--r3);
+  overflow:hidden;will-change:transform;
+}
+.screen-head{
+  display:flex;align-items:center;gap:6px;
+  padding:10px 14px;background:var(--ink-2);
+  border-bottom:1px solid var(--ink);
+}
+.screen-dots{display:flex;gap:5px;}
+.screen-dots span{width:8px;height:8px;border-radius:50%;}
+.screen-dots span:nth-child(1){background:#EF4444;}
+.screen-dots span:nth-child(2){background:var(--gold);}
+.screen-dots span:nth-child(3){background:var(--go);}
+.screen-head-label{font-family:var(--mono);font-size:10px;color:var(--stone);letter-spacing:0.1em;margin-left:auto;}
+.screen-body{padding:var(--s5);}
+
+.screen-primary{
+  width:420px;top:0;right:0;z-index:3;
+  box-shadow:0 40px 100px rgba(232,160,32,0.18),0 0 0 1px rgba(232,160,32,0.15),0 1px 0 rgba(255,255,255,0.03) inset;
+}
+.sp-sub-header{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s3);flex-wrap:wrap;}
+.sp-badge{
+  display:inline-block;padding:3px 8px;background:var(--gold-dim);color:var(--gold);
+  font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid var(--gold-border);border-radius:var(--r-full);font-weight:500;
+}
+.sp-ref{font-family:var(--mono);font-size:10px;color:var(--stone);letter-spacing:0.06em;}
+.sp-client{font-family:var(--display);font-size:22px;color:var(--cream);line-height:1;margin-bottom:2px;}
+.sp-address{font-family:var(--mono);font-size:10px;color:var(--stone);margin-bottom:var(--s4);letter-spacing:0.04em;}
+.sp-status-bar{
+  display:flex;align-items:center;gap:var(--s4);padding:var(--s3) var(--s4);
+  background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--r2);
+  margin-bottom:var(--s4);font-family:var(--mono);font-size:9px;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--stone);
+}
+.sp-status-bar span{transition:color var(--t2);}
+.sp-status-bar .sp-status-current{color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:1px;}
+.sp-status-bar .sp-status-arrow{color:var(--ink-4);font-size:8px;}
+.sp-items{display:flex;flex-direction:column;}
+.sp-item{
+  display:grid;grid-template-columns:auto 1fr auto;gap:var(--s3);align-items:center;
+  padding:var(--s3) var(--s3);border-bottom:1px solid var(--ink-3);
+}
+.sp-item:last-child{border-bottom:none;}
+.sp-item.highlight{background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:var(--r1);margin:2px 0;}
+.sp-item-icon{width:16px;height:16px;color:var(--stone-light);display:flex;align-items:center;justify-content:center;}
+.sp-item.highlight .sp-item-icon{color:var(--gold);}
+.sp-item-body{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.sp-item-name{font-family:var(--body);font-size:12px;color:var(--cream-2);font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sp-item-detail{font-family:var(--mono);font-size:9px;color:var(--stone);letter-spacing:0.06em;}
+.sp-item-price{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:500;}
+.sp-ia-badge{
+  display:inline-block;padding:1px 5px;background:var(--gold-dim);color:var(--gold);
+  font-family:var(--mono);font-size:8px;letter-spacing:0.08em;border:1px solid var(--gold-border);
+  border-radius:var(--r-full);font-weight:500;margin-left:4px;vertical-align:middle;
+}
+.sp-iva-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:var(--s2) var(--s3);color:var(--stone);
+  font-family:var(--mono);font-size:10px;letter-spacing:0.06em;
+}
+.sp-total{
+  margin-top:var(--s2);padding:var(--s4) var(--s5);
+  background:var(--gold);border-radius:var(--r1);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.sp-total-label{font-family:var(--mono);font-size:10px;color:var(--ink);text-transform:uppercase;letter-spacing:0.1em;font-weight:500;}
+.sp-total-value{font-family:var(--display);font-size:28px;color:var(--ink);line-height:1;}
+
+.screen-secondary{
+  width:220px;bottom:20px;left:0px;z-index:4;
+  box-shadow:0 24px 60px rgba(232,160,32,0.14),0 0 0 1px rgba(232,160,32,0.10);
+}
+.ss-title{font-family:var(--mono);font-size:9px;color:var(--stone);letter-spacing:0.12em;margin-bottom:var(--s2);text-transform:uppercase;}
+.ss-name{font-family:var(--display);font-size:16px;color:var(--cream);margin-bottom:var(--s3);line-height:1;}
+.ss-sigbox{
+  height:60px;border:1px dashed var(--gold-border);background:var(--gold-dim);
+  border-radius:var(--r1);display:flex;align-items:center;justify-content:center;
+  margin-bottom:var(--s3);padding:0 var(--s3);
+}
+.ss-btn{
+  width:100%;padding:8px;background:var(--go);color:#fff;
+  border-radius:var(--r1);font-size:11px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  margin-bottom:var(--s2);
+}
+.ss-date{font-family:var(--mono);font-size:9px;color:var(--stone);text-align:center;}
+
+.screen-tertiary{
+  width:180px;top:260px;left:60px;z-index:5;
+  box-shadow:0 20px 50px rgba(0,0,0,0.7),0 0 0 1px rgba(232,160,32,0.08);
+}
+.st-title{font-family:var(--mono);font-size:9px;color:var(--stone);letter-spacing:0.12em;margin-bottom:var(--s2);text-transform:uppercase;}
+.st-obra{font-family:var(--display);font-size:14px;color:var(--cream);margin-bottom:var(--s3);line-height:1;}
+.st-badges{display:flex;gap:6px;margin-bottom:var(--s4);flex-wrap:wrap;}
+.badge{
+  padding:4px 8px;border-radius:var(--r-full);
+  font-family:var(--mono);font-size:8px;letter-spacing:0.08em;
+  text-transform:uppercase;font-weight:500;
+}
+.badge-go{background:var(--go-dim);color:var(--go);border:1px solid rgba(22,163,74,0.25);}
+.badge-gold{background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold-border);}
+.progress{height:4px;background:var(--ink-3);border-radius:var(--r-full);overflow:hidden;margin-bottom:var(--s2);}
+.progress-fill{height:100%;width:65%;background:var(--gold);border-radius:var(--r-full);}
+.progress-label{font-family:var(--mono);font-size:9px;color:var(--stone);letter-spacing:0.06em;margin-bottom:var(--s3);}
+.st-milestones{display:flex;flex-direction:column;gap:4px;}
+.st-milestone{font-family:var(--mono);font-size:9px;color:var(--stone-light);display:flex;align-items:center;gap:6px;}
+.st-milestone .ms-icon{width:10px;text-align:center;flex-shrink:0;}
+.st-milestone.done{color:var(--go);}
+.st-milestone.active{color:var(--gold);}
+
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:var(--s16);}
+  .hero-visual{height:520px;}
+}
+@media(max-width:768px){
+  .hero{padding:120px 0 60px;}
+  .hero-visual{height:420px;max-width:460px;margin:0 auto;}
+  .screen-secondary,.screen-tertiary{display:none;}
+  .screen-primary{position:relative;max-width:100%;width:100%;}
+  .hero-stats-divider{display:none;}
+  .hero-stats{gap:var(--s5);}
+}
+
+/* ═══ SECTIONS GENERAL ═══ */
+section{position:relative;padding:var(--s20) 0;z-index:2;}
+.sec-dark{background:var(--ink-1);}
+.sec-dark::before,.sec-dark::after{
+  content:'';position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-border) 30%,var(--gold-border) 70%,transparent);
+}
+.sec-dark::before{top:0;}
+.sec-dark::after{bottom:0;}
+
+/* ═══ PAIN SECTION ═══ */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s6);}
+.pain-card{
+  position:relative;background:var(--ink-2);border:1px solid var(--ink-3);
+  border-radius:var(--r3);padding:var(--s10) var(--s8) var(--s8);
+  transition:border-color var(--t3),transform var(--t3);overflow:hidden;
+}
+.pain-card:hover{border-color:var(--gold-border);}
+.pain-num{
+  position:absolute;top:var(--s3);right:var(--s5);
+  font-family:var(--display);font-size:88px;line-height:1;
+  color:rgba(232,160,32,0.08);
+}
+.pain-icon{width:24px;height:24px;color:var(--gold);margin-bottom:var(--s5);}
+.pain-title{font-family:var(--body);font-weight:600;font-size:18px;color:var(--cream);margin-bottom:var(--s3);line-height:1.3;}
+.pain-desc{font-family:var(--body);font-weight:300;font-size:14px;line-height:1.65;color:var(--stone-light);}
+@media(max-width:900px){.pain-grid{grid-template-columns:1fr;}}
+
+
+/* ═══ FEATURES (FIX 5B) ═══ */
+.feat-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s6);grid-auto-rows:minmax(240px,auto);}
+.feat-card{
+  background:var(--ink-2);border:1px solid var(--ink-3);
+  border-radius:var(--r3);padding:var(--s10);
+  transition:border-color var(--t3),transform var(--t3);
+  display:flex;flex-direction:column;position:relative;
+}
+.feat-card:hover{border-color:var(--gold-border);}
+.feat-card .feat-icon{width:32px;height:32px;color:var(--gold);margin-bottom:var(--s5);transition:transform var(--t3);}
+.feat-card:hover .feat-icon{transform:scale(1.1);}
+.feat-card h3{font-family:var(--body);font-weight:600;font-size:18px;color:var(--cream);margin-bottom:var(--s3);line-height:1.3;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.feat-card p{font-family:var(--body);font-weight:300;font-size:14px;line-height:1.65;color:var(--stone-light);}
+
+.feat-big{grid-column:1 / span 8;grid-row:1 / span 2;display:grid;grid-template-columns:1fr 1fr;gap:var(--s10);align-items:center;}
+.feat-big .feat-icon{width:44px;height:44px;}
+.feat-big h3{font-family:var(--display);font-size:32px;font-weight:400;line-height:1;margin-bottom:var(--s4);}
+.feat-big-tag{
+  display:inline-block;margin-top:var(--s4);padding:4px 10px;
+  background:var(--gold-dim);color:var(--gold);
+  font-family:var(--mono);font-size:10px;letter-spacing:0.1em;
+  text-transform:uppercase;border:1px solid var(--gold-border);border-radius:var(--r-full);
+}
+.feat-small{grid-column:span 4;}
+.feat-medium{grid-column:span 4;}
+.feat-medium .feat-tag{
+  display:inline-block;margin-top:var(--s4);padding:4px 10px;
+  background:var(--gold-dim);color:var(--gold);
+  font-family:var(--mono);font-size:10px;letter-spacing:0.1em;
+  text-transform:uppercase;border:1px solid var(--gold-border);border-radius:var(--r-full);
+}
+.feat-mock{
+  background:var(--ink);border:1px solid var(--ink-3);
+  border-radius:var(--r2);padding:var(--s5);
+}
+.feat-mock-title{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--stone);margin-bottom:var(--s4);text-transform:uppercase;}
+.feat-mock-row{
+  display:grid;grid-template-columns:8px 1fr auto;gap:var(--s3);align-items:center;
+  padding:var(--s3) 0;border-bottom:1px solid var(--ink-3);
+}
+.feat-mock-row:last-of-type{border-bottom:none;}
+.feat-mock-dot{width:6px;height:6px;border-radius:50%;}
+.feat-mock-dot.m{background:var(--gold);}
+.feat-mock-dot.l{background:#60A5FA;}
+.feat-mock-dot.e{background:#A78BFA;}
+.feat-mock-dot.x{background:var(--stone);}
+.feat-mock-dot.g{background:var(--go);}
+.feat-mock-label{font-size:12px;color:var(--cream-2);font-family:var(--body);font-weight:300;}
+.feat-mock-val{font-family:var(--mono);font-size:12px;color:var(--cream-2);font-weight:500;}
+.feat-mock-sep{height:1px;background:var(--ink-3);margin:var(--s2) 0;}
+.feat-mock-total{
+  margin-top:var(--s3);padding:var(--s3) var(--s4);background:var(--gold);
+  border-radius:var(--r1);display:flex;justify-content:space-between;align-items:center;
+}
+.feat-mock-total-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink);font-weight:500;}
+.feat-mock-total-val{font-family:var(--display);font-size:20px;color:var(--ink);line-height:1;}
+.feat-mock-perm2{font-family:var(--mono);font-size:9px;color:var(--ink);opacity:0.7;margin-left:6px;}
+
+.feat-badge-new{
+  font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--gold);color:var(--ink);padding:2px 7px;border-radius:var(--r-full);font-weight:500;
+}
+
+@media(max-width:1024px){
+  .feat-grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:auto;}
+  .feat-big{grid-column:span 4;grid-row:auto;}
+  .feat-small{grid-column:span 2;}
+  .feat-medium{grid-column:span 2;}
+}
+@media(max-width:768px){
+  .feat-grid{grid-template-columns:1fr;}
+  .feat-big{grid-template-columns:1fr;gap:var(--s8);}
+  .feat-small{grid-column:span 1;}
+  .feat-medium{grid-column:span 1;}
+}
+
+/* ═══ HOW / STEPS ═══ */
+.steps-section{position:relative;}
+.steps-wrap{position:relative;}
+.timeline-svg{
+  position:absolute;top:24px;left:0;right:0;width:100%;height:48px;z-index:1;
+  pointer-events:none;
+}
+.steps-grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s6);z-index:2;}
+.step{position:relative;}
+.step-node{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--ink);border:1px solid var(--ink-4);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:var(--s6);position:relative;z-index:2;
+}
+.step-node::before{
+  content:'';width:12px;height:12px;border-radius:50%;background:transparent;
+}
+.step-done .step-node{border-color:var(--gold);background:var(--gold);}
+.step-done .step-node::before{background:var(--ink);}
+.step-active .step-node{border:2px solid var(--gold);background:var(--ink);box-shadow:0 0 0 4px rgba(232,160,32,0.08);}
+.step-active .step-node::before{background:var(--gold);}
+.step-num{font-family:var(--display);font-size:48px;color:var(--gold);line-height:1;margin-bottom:var(--s3);}
+.step-title{font-family:var(--body);font-weight:600;font-size:16px;color:var(--cream);margin-bottom:var(--s2);line-height:1.3;}
+.step-desc{font-family:var(--body);font-weight:300;font-size:13px;line-height:1.65;color:var(--stone-light);}
+@media(max-width:768px){
+  .steps-grid{grid-template-columns:repeat(2,1fr);gap:var(--s10) var(--s6);}
+  .timeline-svg{display:none;}
+}
+
+/* ═══ COMPARE ═══ */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);}
+.cmp-col{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--r3);overflow:hidden;}
+.cmp-head{
+  padding:var(--s6) var(--s8);display:flex;align-items:center;gap:var(--s3);
+  border-bottom:1px solid var(--ink-3);
+}
+.cmp-col.bad .cmp-head{background:rgba(220,38,38,0.08);border-top:2px solid var(--stop);}
+.cmp-col.good .cmp-head{background:var(--gold-dim);border-top:2px solid var(--gold);}
+.cmp-head svg{width:20px;height:20px;}
+.cmp-col.bad .cmp-head svg{color:var(--stop);}
+.cmp-col.good .cmp-head svg{color:var(--gold);}
+.cmp-head h3{font-family:var(--body);font-weight:600;font-size:15px;color:var(--cream);line-height:1;}
+.cmp-list{list-style:none;padding:var(--s5) var(--s8) var(--s8);display:flex;flex-direction:column;}
+.cmp-list li{
+  display:grid;grid-template-columns:20px 1fr;gap:var(--s3);align-items:flex-start;
+  padding:var(--s4) 0;border-bottom:1px solid var(--ink-3);
+  font-family:var(--body);font-weight:300;font-size:14px;line-height:1.5;color:var(--cream-2);
+}
+.cmp-list li:last-child{border-bottom:none;}
+.cmp-list li svg{width:16px;height:16px;flex-shrink:0;margin-top:3px;}
+.cmp-col.bad .cmp-list svg{color:var(--stone);}
+.cmp-col.good .cmp-list svg{color:var(--gold);}
+@media(max-width:768px){.cmp-grid{grid-template-columns:1fr;}}
+
+/* ═══ INTERACTIVE DEMO (4-ACT FLOW) ═══ */
+#demo{padding:var(--s24) 0;}
+.demo-shell{
+  background:var(--ink-1);border:1px solid var(--gold-border);border-radius:var(--r4);
+  box-shadow:0 0 120px rgba(232,160,32,0.10);overflow:hidden;
+}
+
+/* Tab bar */
+.demo-tabs{display:flex;border-bottom:1px solid var(--ink-3);background:var(--ink);}
+.demo-tab{
+  flex:1;padding:14px 8px 12px;text-align:center;cursor:pointer;position:relative;
+  font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--stone);background:transparent;border:none;transition:color var(--t2);
+}
+.demo-tab.active{color:var(--gold);background:var(--gold-dim);border-bottom:2px solid var(--gold);}
+.demo-tab:hover:not(.active){color:var(--cream-2);}
+.demo-tab-progress{
+  position:absolute;bottom:0;left:0;height:2px;width:0%;
+  background:var(--gold);opacity:0.4;transition:none;
+}
+
+/* Stage area */
+.demo-stage{position:relative;min-height:580px;overflow:hidden;}
+.demo-act{
+  position:absolute;inset:0;padding:var(--s8);display:none;
+  opacity:0;transform:scale(0.97);
+}
+.demo-act.active{display:flex;opacity:1;transform:scale(1);}
+
+/* Phone frame */
+.demo-phone{
+  width:300px;min-height:580px;flex-shrink:0;position:relative;
+  background:var(--ink-2);border:2px solid var(--ink-3);border-radius:44px;
+  box-shadow:0 0 0 6px var(--ink-1),0 0 0 8px var(--ink-3),0 40px 80px rgba(0,0,0,0.6),0 0 40px rgba(232,160,32,0.08);
+}
+.demo-phone-notch{
+  width:120px;height:28px;background:var(--ink-3);border-radius:0 0 16px 16px;
+  margin:0 auto;position:relative;z-index:2;
+}
+.demo-phone-screen{
+  margin:0 8px 8px;border-radius:0 0 38px 38px;overflow:hidden;
+  background:var(--ink);min-height:500px;position:relative;
+}
+
+/* Context panel */
+.demo-context{
+  background:rgba(16,16,16,0.9);border:1px solid var(--gold-border);border-radius:var(--r3);
+  padding:var(--s6);width:240px;flex-shrink:0;align-self:flex-start;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.demo-context-title{font-family:var(--mono);font-size:11px;color:var(--stone);margin-bottom:var(--s4);}
+.demo-context-event{
+  display:flex;align-items:center;gap:var(--s3);padding:var(--s2) 0;
+  font-family:var(--mono);font-size:11px;color:var(--stone);transition:color var(--t2);
+}
+.demo-context-event.active{color:var(--cream-2);}
+.demo-context-dot{
+  width:8px;height:8px;border-radius:50%;border:1.5px solid var(--stone);
+  flex-shrink:0;transition:all var(--t2);
+}
+.demo-context-event.active .demo-context-dot{background:var(--gold);border-color:var(--gold);}
+.demo-context-badge{
+  display:inline-flex;align-items:center;gap:4px;margin-top:var(--s4);padding:6px 12px;
+  background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:var(--r2);
+  font-family:var(--mono);font-size:11px;color:var(--go);opacity:0;
+}
+.demo-context-badge.visible{opacity:1;}
+
+/* Act 01 specifics */
+.act01-layout{gap:var(--s8);align-items:flex-start;justify-content:center;}
+.act01-header{
+  padding:12px 16px;font-family:var(--mono);font-size:10px;color:var(--stone);
+  border-bottom:1px solid var(--ink-3);
+}
+.act01-placeholder{
+  padding:var(--s6) var(--s5);color:var(--stone);font-family:var(--body);font-size:13px;
+}
+.act01-mic{
+  width:64px;height:64px;border-radius:50%;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;margin:var(--s6) auto var(--s3);
+  cursor:pointer;position:relative;
+}
+.act01-mic.recording{background:#EF4444;}
+.act01-mic svg{width:28px;height:28px;color:var(--ink);}
+.act01-mic-label{
+  text-align:center;font-family:var(--mono);font-size:10px;color:var(--stone);
+}
+.act01-visualizer{
+  display:flex;align-items:center;justify-content:center;gap:2px;
+  height:32px;margin:var(--s4) var(--s5);opacity:0;
+}
+.act01-visualizer.visible{opacity:1;}
+.act01-vbar{width:3px;background:var(--gold);border-radius:2px;height:4px;}
+.act01-dictation{
+  padding:0 var(--s5);font-family:var(--body);font-size:13px;font-style:italic;
+  color:var(--stone-light);line-height:1.5;min-height:60px;
+}
+.act01-processing{
+  display:flex;align-items:center;gap:var(--s3);justify-content:center;
+  padding:var(--s4);opacity:0;
+}
+.act01-processing.visible{opacity:1;}
+.act01-spinner{
+  width:14px;height:14px;border:2px solid var(--gold-border);border-top-color:var(--gold);
+  border-radius:50%;animation:spin 0.8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.act01-processing-text{font-family:var(--mono);font-size:11px;color:var(--gold);}
+.act01-items{padding:0 var(--s4);}
+.act01-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:var(--s3) var(--s3);border-bottom:1px solid var(--ink-3);
+  font-family:var(--body);font-size:12px;color:var(--cream-2);
+  opacity:0;transform:translateX(30px);
+}
+.act01-item-left{display:flex;flex-direction:column;gap:2px;}
+.act01-item-name{font-weight:500;}
+.act01-item-detail{font-family:var(--mono);font-size:9px;color:var(--stone);}
+.act01-item-price{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:600;}
+.act01-total{
+  margin:var(--s4) var(--s4);padding:var(--s3) var(--s4);background:var(--gold);
+  border-radius:var(--r1);display:flex;justify-content:space-between;align-items:center;
+  opacity:0;
+}
+.act01-total-label{font-family:var(--mono);font-size:10px;color:var(--ink);text-transform:uppercase;letter-spacing:0.1em;}
+.act01-total-value{font-family:var(--display);font-size:24px;color:var(--ink);line-height:1;}
+
+/* Act 02 specifics */
+.act02-layout{flex-direction:column;gap:0;}
+.act02-browser{
+  background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--r3);
+  overflow:hidden;width:100%;
+}
+.act02-browser-bar{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  background:var(--ink);border-bottom:1px solid var(--ink-3);
+}
+.act02-browser-dots{display:flex;gap:5px;}
+.act02-browser-dots span{width:8px;height:8px;border-radius:50%;}
+.act02-browser-dots span:nth-child(1){background:#EF4444;}
+.act02-browser-dots span:nth-child(2){background:var(--gold);}
+.act02-browser-dots span:nth-child(3){background:var(--go);}
+.act02-browser-url{
+  flex:1;padding:5px 12px;background:var(--ink-2);border:1px solid var(--ink-3);
+  border-radius:var(--r-full);font-family:var(--mono);font-size:10px;color:var(--stone);
+}
+.act02-body{display:grid;grid-template-columns:65% 35%;min-height:440px;}
+.act02-left{padding:var(--s5);border-right:1px solid var(--ink-3);}
+.act02-right{padding:var(--s5);background:var(--ink);}
+.act02-header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s4);}
+.act02-title{font-family:var(--body);font-size:14px;color:var(--cream);font-weight:500;}
+.act02-chips{display:flex;gap:var(--s2);}
+.act02-status-chip{
+  padding:4px 10px;border-radius:var(--r-full);font-family:var(--mono);font-size:9px;
+  letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--ink-4);color:var(--stone);
+}
+.act02-status-chip.active{background:var(--gold-dim);border-color:var(--gold-border);color:var(--gold);}
+.act02-item{
+  display:grid;grid-template-columns:24px 1fr 70px 80px 90px 24px;gap:var(--s2);
+  align-items:center;padding:var(--s3) var(--s2);border-bottom:1px solid var(--ink-3);
+  font-size:12px;
+}
+.act02-item:hover .act02-item-del{opacity:1;}
+.act02-item-check{width:16px;height:16px;border:1.5px solid var(--gold);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--gold);}
+.act02-item-check svg{width:10px;height:10px;}
+.act02-item-info{display:flex;flex-direction:column;gap:1px;}
+.act02-item-name{font-family:var(--body);color:var(--cream-2);font-weight:400;}
+.act02-item-desc{font-family:var(--mono);font-size:9px;color:var(--stone);}
+.act02-item-qty{
+  width:50px;padding:4px 6px;background:var(--ink);border:1px solid var(--ink-4);
+  border-radius:var(--r1);font-family:var(--mono);font-size:11px;color:var(--cream);
+  text-align:center;outline:none;
+}
+.act02-item-qty:focus{border-color:var(--gold-border);}
+.act02-item-unit{font-family:var(--mono);font-size:11px;color:var(--stone);}
+.act02-item-total{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:600;text-align:right;}
+.act02-item-del{
+  width:20px;height:20px;border:none;background:transparent;color:var(--stone);
+  cursor:pointer;opacity:0;transition:opacity var(--t2);font-size:14px;
+}
+.act02-modified{
+  display:inline-block;padding:2px 8px;background:var(--gold-dim);border:1px solid var(--gold-border);
+  border-radius:var(--r-full);font-family:var(--mono);font-size:9px;color:var(--gold);
+  margin-left:var(--s2);opacity:0;transition:opacity var(--t2);
+}
+.act02-add-btn{
+  display:flex;align-items:center;gap:var(--s2);padding:var(--s3) var(--s4);margin-top:var(--s3);
+  border:1px dashed var(--ink-4);border-radius:var(--r2);background:transparent;
+  color:var(--stone);font-family:var(--mono);font-size:11px;cursor:pointer;
+  transition:all var(--t2);width:100%;
+}
+.act02-add-btn:hover{border-color:var(--gold-border);color:var(--gold);}
+/* Summary */
+.act02-summary-title{font-family:var(--mono);font-size:9px;color:var(--stone);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:var(--s4);}
+.act02-bar-row{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s2);}
+.act02-bar-label{font-family:var(--mono);font-size:10px;color:var(--cream-2);width:90px;flex-shrink:0;}
+.act02-bar{height:6px;background:var(--ink-3);border-radius:var(--r-full);flex:1;overflow:hidden;}
+.act02-bar-fill{height:100%;border-radius:var(--r-full);transition:width 0.5s ease;}
+.act02-bar-fill.mo{background:var(--gold);}
+.act02-bar-fill.mat{background:#60A5FA;}
+.act02-bar-fill.misc{background:var(--stone);}
+.act02-bar-val{font-family:var(--mono);font-size:10px;color:var(--cream-2);width:60px;text-align:right;flex-shrink:0;}
+.act02-totals{margin-top:var(--s5);border-top:1px solid var(--ink-3);padding-top:var(--s4);}
+.act02-total-row{display:flex;justify-content:space-between;padding:var(--s2) 0;font-family:var(--mono);font-size:11px;color:var(--stone-light);}
+.act02-total-row.grand{
+  margin-top:var(--s3);padding:var(--s4) var(--s5);background:var(--gold);border-radius:var(--r1);
+}
+.act02-total-row.grand span:first-child{font-family:var(--mono);font-size:10px;color:var(--ink);text-transform:uppercase;letter-spacing:0.1em;}
+.act02-total-row.grand span:last-child{font-family:var(--display);font-size:32px;color:var(--ink);line-height:1;}
+/* Margin panel */
+.act02-margin{
+  margin-top:var(--s5);padding:var(--s5);background:var(--ink-2);
+  border:1px solid var(--gold-border);border-radius:var(--r2);
+}
+.act02-margin-label{font-family:var(--mono);font-size:10px;color:var(--stone);text-transform:uppercase;letter-spacing:0.1em;}
+.act02-margin-value{font-family:var(--display);font-size:40px;color:var(--gold);line-height:1;margin:var(--s2) 0;}
+.act02-margin-traffic{display:flex;align-items:center;gap:var(--s2);font-family:var(--mono);font-size:11px;color:var(--go);margin-bottom:var(--s3);}
+.act02-margin-bar{height:6px;border-radius:var(--r-full);background:linear-gradient(to right,#EF4444,var(--gold),var(--go));position:relative;margin-bottom:var(--s3);}
+.act02-margin-marker{
+  position:absolute;top:-3px;width:12px;height:12px;border-radius:50%;
+  background:var(--cream);border:2px solid var(--gold);transform:translateX(-50%);
+  transition:left 0.5s ease;
+}
+.act02-margin-note{font-family:var(--body);font-size:12px;color:var(--stone-light);line-height:1.5;}
+/* PDF & send buttons */
+.act02-pdf-btn,.act02-send-btn{
+  display:flex;align-items:center;justify-content:center;gap:var(--s2);
+  padding:var(--s3) var(--s4);border-radius:var(--r2);font-family:var(--mono);
+  font-size:11px;cursor:pointer;transition:all var(--t2);width:100%;margin-top:var(--s3);
+  border:1px solid var(--ink-4);
+}
+.act02-pdf-btn{background:transparent;color:var(--cream-2);}
+.act02-pdf-btn:hover{border-color:var(--gold-border);}
+.act02-send-btn{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600;}
+.act02-send-btn:hover{filter:brightness(1.1);}
+.act02-pdf-progress{
+  height:3px;background:var(--ink-3);border-radius:var(--r-full);overflow:hidden;margin-top:var(--s2);display:none;
+}
+.act02-pdf-progress-fill{height:100%;width:0%;background:var(--gold);border-radius:var(--r-full);transition:width 1.5s ease;}
+.act02-pdf-done{
+  display:none;align-items:center;gap:var(--s2);justify-content:center;
+  margin-top:var(--s2);font-family:var(--mono);font-size:10px;color:var(--go);
+}
+
+/* Act 03 specifics */
+.act03-layout{gap:var(--s8);align-items:flex-start;justify-content:center;}
+.act03-lockscreen{padding:var(--s8) var(--s5);text-align:center;}
+.act03-time{font-family:var(--display);font-size:64px;color:var(--cream);line-height:1;margin-bottom:var(--s6);}
+.act03-notif{
+  background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--r3);
+  padding:var(--s4);text-align:left;display:flex;gap:var(--s3);margin-bottom:var(--s5);
+}
+.act03-notif-icon{
+  width:36px;height:36px;border-radius:10px;background:#25D366;display:flex;
+  align-items:center;justify-content:center;flex-shrink:0;font-size:18px;
+}
+.act03-notif-body{flex:1;}
+.act03-notif-sender{font-family:var(--body);font-size:12px;color:var(--cream);font-weight:500;}
+.act03-notif-text{font-family:var(--body);font-size:11px;color:var(--stone-light);margin-top:2px;line-height:1.4;}
+.act03-view-btn{
+  display:block;width:100%;padding:var(--s3);background:var(--gold);color:var(--ink);
+  border:none;border-radius:var(--r2);font-family:var(--mono);font-size:12px;
+  cursor:pointer;font-weight:600;text-align:center;
+}
+.act03-budget-view{display:none;padding:var(--s4) var(--s5);}
+.act03-budget-header{
+  display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4);
+  padding-bottom:var(--s3);border-bottom:1px solid var(--ink-3);
+}
+.act03-budget-logo{font-family:var(--display);font-size:16px;color:var(--gold);}
+.act03-budget-ref{font-family:var(--mono);font-size:10px;color:var(--stone);}
+.act03-budget-client{font-family:var(--body);font-size:12px;color:var(--cream-2);margin-bottom:var(--s3);}
+.act03-budget-items{margin-bottom:var(--s4);}
+.act03-budget-item{
+  display:flex;justify-content:space-between;padding:var(--s2) 0;
+  border-bottom:1px solid var(--ink-3);font-family:var(--body);font-size:11px;color:var(--cream-2);
+}
+.act03-budget-item-price{font-family:var(--mono);color:var(--gold);}
+.act03-budget-total{
+  padding:var(--s3) var(--s4);background:var(--gold);border-radius:var(--r1);
+  display:flex;justify-content:space-between;align-items:center;margin:var(--s4) 0;
+}
+.act03-budget-total-label{font-family:var(--mono);font-size:10px;color:var(--ink);text-transform:uppercase;}
+.act03-budget-total-val{font-family:var(--display);font-size:22px;color:var(--ink);}
+.act03-sign-btn{
+  display:block;width:100%;padding:var(--s3);background:var(--go);color:var(--ink);
+  border:none;border-radius:var(--r2);font-family:var(--mono);font-size:12px;
+  cursor:pointer;font-weight:600;text-align:center;
+}
+.act03-signature-view{display:none;padding:var(--s5);text-align:center;}
+.act03-sig-area{
+  height:100px;border:2px dashed var(--gold-border);background:var(--gold-dim);
+  border-radius:var(--r2);display:flex;align-items:center;justify-content:center;
+  margin-bottom:var(--s4);cursor:pointer;position:relative;overflow:hidden;
+}
+.act03-sig-placeholder{font-family:var(--mono);font-size:12px;color:var(--gold);position:absolute;}
+.act03-sig-svg{position:absolute;width:100%;height:100%;}
+.act03-sig-svg path{
+  stroke:var(--gold);stroke-width:2;fill:none;stroke-linecap:round;
+  stroke-dasharray:300;stroke-dashoffset:300;
+}
+.act03-confirm{display:none;text-align:center;padding:var(--s4);}
+.act03-checkmark{
+  width:48px;height:48px;border-radius:50%;background:var(--go);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto var(--s3);font-size:24px;color:var(--ink);
+  transform:scale(0);
+}
+.act03-eidas{
+  display:inline-flex;align-items:center;gap:4px;padding:4px 12px;
+  background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);
+  border-radius:var(--r-full);font-family:var(--mono);font-size:10px;color:var(--go);
+  margin-bottom:var(--s3);
+}
+.act03-confirm-text{font-family:var(--body);font-size:12px;color:var(--stone-light);line-height:1.5;}
+.act03-signed-chip{
+  display:inline-block;padding:4px 10px;background:var(--go);color:var(--ink);
+  border-radius:var(--r-full);font-family:var(--mono);font-size:9px;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;margin-top:var(--s3);
+}
+
+/* Act 04 specifics */
+.act04-layout{justify-content:center;gap:var(--s8);}
+.demo-tablet{
+  width:100%;max-width:680px;min-height:520px;
+  background:var(--ink-2);border:2px solid var(--ink-3);border-radius:24px;
+  box-shadow:0 40px 80px rgba(0,0,0,0.5);overflow:hidden;
+}
+.act04-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:var(--s4) var(--s5);border-bottom:1px solid var(--ink-3);
+}
+.act04-company{font-family:var(--body);font-size:13px;color:var(--cream);font-weight:500;}
+.act04-subtitle{font-family:var(--mono);font-size:10px;color:var(--stone);}
+.act04-live-badge{
+  display:flex;align-items:center;gap:4px;padding:3px 10px;
+  background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);
+  border-radius:var(--r-full);font-family:var(--mono);font-size:9px;color:var(--go);
+}
+.act04-live-dot{width:6px;height:6px;border-radius:50%;background:var(--go);animation:blink 1.5s ease-in-out infinite;}
+.act04-body{padding:var(--s5);}
+.act04-project-title{font-family:var(--body);font-size:14px;color:var(--cream-2);margin-bottom:var(--s4);}
+.act04-progress-wrap{margin-bottom:var(--s5);}
+.act04-progress-bar{height:12px;background:var(--ink-3);border-radius:var(--r-full);overflow:hidden;margin-bottom:var(--s2);}
+.act04-progress-fill{height:100%;width:0%;background:linear-gradient(to right,var(--gold),#F59E0B);border-radius:var(--r-full);}
+.act04-progress-label{font-family:var(--mono);font-size:11px;color:var(--stone-light);}
+.act04-timeline{position:relative;padding-left:24px;margin-bottom:var(--s5);}
+.act04-timeline-line{
+  position:absolute;left:7px;top:0;width:2px;height:0%;
+  background:var(--gold);transition:height 1.5s ease;
+}
+.act04-timeline-line-bg{
+  position:absolute;left:7px;top:0;width:2px;height:100%;background:var(--ink-3);
+}
+.act04-stage{padding:var(--s3) 0;position:relative;}
+.act04-stage-dot{
+  position:absolute;left:-20px;top:14px;width:16px;height:16px;border-radius:50%;
+  border:2px solid var(--ink-4);background:var(--ink);display:flex;align-items:center;
+  justify-content:center;font-size:8px;
+}
+.act04-stage.completed .act04-stage-dot{background:var(--go);border-color:var(--go);color:var(--ink);}
+.act04-stage.active .act04-stage-dot{background:var(--gold);border-color:var(--gold);color:var(--ink);animation:blink 1.5s ease-in-out infinite;}
+.act04-stage-name{font-family:var(--body);font-size:12px;color:var(--cream-2);font-weight:500;}
+.act04-stage-detail{font-family:var(--mono);font-size:10px;color:var(--stone);margin-top:2px;}
+.act04-stage-mini-bar{height:4px;width:80px;background:var(--ink-3);border-radius:var(--r-full);margin-top:4px;overflow:hidden;}
+.act04-stage-mini-fill{height:100%;background:var(--gold);border-radius:var(--r-full);}
+.act04-stage-thumb{
+  display:inline-block;width:40px;height:30px;border-radius:4px;margin-top:4px;
+}
+.act04-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s2);margin-bottom:var(--s5);}
+.act04-gallery-item{
+  height:60px;border-radius:var(--r2);overflow:hidden;cursor:pointer;
+  transition:transform var(--t2),box-shadow var(--t2);position:relative;
+}
+.act04-gallery-item:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,0.4);}
+.act04-gallery-label{
+  position:absolute;bottom:0;left:0;right:0;padding:4px 6px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.8));
+  font-family:var(--mono);font-size:8px;color:var(--cream-2);
+}
+.act04-contact{
+  display:block;width:100%;padding:var(--s3);background:var(--go);color:var(--ink);
+  border:none;border-radius:var(--r2);font-family:var(--mono);font-size:12px;
+  cursor:pointer;font-weight:600;text-align:center;
+}
+
+/* Hint bar */
+.demo-hint{
+  padding:var(--s3) var(--s5);text-align:center;border-top:1px solid var(--ink-3);
+  font-family:var(--mono);font-size:11px;color:var(--stone);
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .demo-context{display:none;}
+  .act01-layout,.act03-layout,.act04-layout{flex-direction:column;align-items:center;}
+  .demo-phone{width:260px;min-height:500px;}
+  .act02-body{grid-template-columns:1fr;}
+  .act02-right{border-top:1px solid var(--ink-3);}
+  .demo-tablet{max-width:100%;}
+  .demo-act{padding:var(--s4);}
+  .demo-stage{min-height:auto;}
+  .act02-item{grid-template-columns:24px 1fr 50px 70px 24px;font-size:11px;}
+  .act02-item-unit{display:none;}
+}
+
+/* ═══ VS COMPETITION TABLE ═══ */
+.vs-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.vs-table{
+  width:100%;border-collapse:collapse;min-width:640px;
+  font-family:var(--body);font-size:14px;
+}
+.vs-table th,.vs-table td{
+  padding:var(--s4) var(--s5);text-align:left;
+  border-bottom:1px solid var(--ink-3);
+}
+.vs-table thead th{
+  font-family:var(--mono);font-size:11px;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--stone);font-weight:500;
+  background:var(--ink-2);border-bottom:1px solid var(--ink-3);
+}
+.vs-table thead th.vs-highlight{
+  background:var(--gold-dim);color:var(--gold);
+  border-bottom:2px solid var(--gold);
+}
+.vs-table tbody td{color:var(--cream-2);font-weight:300;}
+.vs-table tbody td.vs-feature{
+  font-weight:500;color:var(--cream);
+  font-family:var(--body);font-size:13px;
+}
+.vs-table tbody td.vs-highlight{
+  background:var(--gold-dim);border-left:1px solid var(--gold-border);
+  border-right:1px solid var(--gold-border);
+}
+.vs-table tbody tr:last-child td.vs-highlight{
+  border-bottom:1px solid var(--gold-border);
+}
+.vs-check{color:var(--go);font-weight:600;}
+.vs-cross{color:var(--stone);}
+.vs-gold{color:var(--gold);font-weight:600;}
+.vs-table .vs-price-row td{font-weight:600;}
+.vs-table .vs-price-row td.vs-highlight{color:var(--gold);font-weight:700;font-family:var(--mono);}
+.vs-footnote{
+  margin-top:var(--s4);font-family:var(--mono);font-size:10px;
+  color:var(--stone);line-height:1.6;
+}
+
+/* ═══ TESTIMONIALS ═══ */
+.tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s6);}
+.tst-card{
+  background:var(--ink-2);border:1px solid var(--ink-3);
+  border-radius:var(--r3);padding:var(--s8);
+  transition:all var(--t3);will-change:transform;
+}
+.tst-stars{display:flex;gap:3px;margin-bottom:var(--s5);}
+.tst-stars svg{width:14px;height:14px;color:var(--gold);fill:var(--gold);}
+.tst-quote{font-family:var(--body);font-weight:300;font-style:italic;font-size:14px;line-height:1.65;color:var(--cream-2);margin-bottom:var(--s6);}
+.tst-sep{height:1px;background:var(--ink-4);margin-bottom:var(--s5);}
+.tst-author{display:flex;align-items:center;gap:var(--s3);}
+.tst-avatar{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--gold-border);background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:18px;color:var(--gold);line-height:1;
+}
+.tst-author-name{font-family:var(--body);font-weight:600;font-size:13px;color:var(--cream);line-height:1.3;}
+.tst-author-role{font-family:var(--body);font-weight:300;font-size:12px;color:var(--stone);line-height:1.3;}
+@media(max-width:900px){.tst-grid{grid-template-columns:1fr;}}
+
+/* ═══ PRICING ═══ */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s6);align-items:stretch;}
+.price-card{
+  background:var(--ink-2);border:1px solid var(--ink-3);
+  border-radius:var(--r3);padding:var(--s10) var(--s8) var(--s8);
+  display:flex;flex-direction:column;position:relative;
+}
+.price-card.feat{
+  border:1px solid var(--gold);
+  box-shadow:0 0 60px rgba(232,160,32,0.12),0 0 0 1px var(--gold-border);
+  transform:scale(1.03);
+}
+.price-badge-bar{
+  position:absolute;top:0;left:0;right:0;padding:8px;
+  background:var(--gold);color:var(--ink);
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;text-align:center;
+  border-radius:var(--r3) var(--r3) 0 0;
+}
+.price-card.feat{padding-top:var(--s16);}
+.price-name{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--stone);text-transform:uppercase;margin-bottom:var(--s5);}
+.price-amount{display:flex;align-items:baseline;gap:2px;margin-bottom:4px;line-height:1;}
+.price-amount .num{font-family:var(--mono);font-size:56px;color:var(--cream);font-weight:500;letter-spacing:-0.02em;}
+.price-amount .cur{font-family:var(--mono);font-size:20px;color:var(--stone);font-weight:400;}
+.price-amount .per{font-family:var(--body);font-weight:300;font-size:13px;color:var(--stone);margin-left:6px;}
+.price-amount .custom{font-family:var(--mono);font-size:36px;color:var(--cream);font-weight:500;}
+.price-sub{font-family:var(--body);font-weight:300;font-size:13px;color:var(--stone-light);margin-bottom:var(--s8);}
+.price-list{list-style:none;display:flex;flex-direction:column;flex:1;margin-bottom:var(--s8);}
+.price-list li{
+  display:grid;grid-template-columns:16px 1fr;gap:var(--s3);align-items:flex-start;
+  padding:var(--s3) 0;border-bottom:1px solid var(--ink-3);
+  font-family:var(--body);font-weight:300;font-size:13px;line-height:1.5;
+}
+.price-list li:last-child{border-bottom:none;}
+.price-list li svg{width:14px;height:14px;flex-shrink:0;margin-top:3px;}
+.price-list li.yes{color:var(--cream-2);}
+.price-list li.yes svg{color:var(--go);}
+.price-list li.no{color:var(--stone);}
+.price-list li.no svg{color:var(--stone);}
+.price-card .btn{justify-content:center;width:100%;}
+@media(max-width:900px){
+  .price-grid{grid-template-columns:1fr;}
+  .price-card.feat{transform:none;order:-1;}
+}
+
+/* ═══ FAQ ═══ */
+.faq-wrap{max-width:760px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--ink-3);cursor:pointer;}
+.faq-q{
+  display:grid;grid-template-columns:1fr 24px;gap:var(--s6);align-items:center;
+  padding:var(--s6) 0;
+  font-family:var(--body);font-weight:500;font-size:16px;color:var(--cream);line-height:1.4;
+  transition:color var(--t2);
+}
+.faq-item:hover .faq-q{color:var(--gold);}
+.faq-toggle{
+  width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+  color:var(--stone);transition:color var(--t2);
+}
+.faq-item.open .faq-toggle{color:var(--gold);}
+.faq-toggle svg{width:14px;height:14px;}
+.faq-a{overflow:hidden;height:0;opacity:0;}
+.faq-a-inner{
+  padding:0 0 var(--s6);font-family:var(--body);font-weight:300;
+  font-size:14px;line-height:1.70;color:var(--stone-light);max-width:620px;
+}
+
+/* ═══ CTA FINAL (FIX 2) ═══ */
+.cta-final{position:relative;padding:var(--s24) 0;overflow:hidden;}
+.cta-glow{
+  position:absolute;top:50%;left:50%;width:800px;height:800px;
+  transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(circle,var(--gold-glow),transparent 65%);
+  filter:blur(40px);
+  will-change:transform;
+}
+.cta-final h2{font-size:clamp(64px,10vw,128px);line-height:0.88;margin-bottom:var(--s6);position:relative;z-index:2;text-align:center;}
+.cta-final .sub{font-family:var(--body);font-weight:300;font-size:17px;line-height:1.65;color:var(--cream-2);max-width:600px;margin:0 auto var(--s12);position:relative;z-index:2;text-align:center;}
+
+.cta-guarantees-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);
+  margin-bottom:var(--s12);position:relative;z-index:2;
+}
+.cta-guarantee-card{
+  background:var(--ink-2);border:1px solid var(--gold-border);border-radius:var(--r2);
+  padding:var(--s5) var(--s6);display:flex;align-items:center;gap:var(--s3);
+}
+.cta-guarantee-card svg{width:20px;height:20px;color:var(--gold);flex-shrink:0;}
+.cta-guarantee-card span{font-family:var(--body);font-size:13px;color:var(--cream-2);font-weight:400;}
+
+.cta-options-grid{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:0;
+  position:relative;z-index:2;
+}
+.cta-option{
+  background:var(--ink-2);border-radius:var(--r3);padding:var(--s8);
+  display:flex;flex-direction:column;
+}
+.cta-option-left{border:1px solid var(--gold);}
+.cta-option-right{border:1px solid var(--ink-3);}
+.cta-option-badge{
+  display:inline-block;align-self:flex-start;padding:4px 12px;
+  background:var(--gold);color:var(--ink);font-family:var(--mono);font-size:9px;
+  letter-spacing:0.12em;text-transform:uppercase;font-weight:500;
+  border-radius:var(--r-full);margin-bottom:var(--s5);
+}
+.cta-option h3{font-family:var(--display);font-size:28px;color:var(--cream);line-height:1;margin-bottom:var(--s3);}
+.cta-option .cta-option-desc{font-family:var(--body);font-weight:300;font-size:14px;line-height:1.65;color:var(--stone-light);margin-bottom:var(--s6);}
+
+.cta-form-inline{display:flex;flex-direction:column;gap:var(--s3);}
+.cta-form-inline input{
+  padding:14px 16px;background:var(--ink);border:1px solid var(--ink-4);
+  border-radius:var(--r1);color:var(--cream);font-family:var(--body);font-size:14px;
+  outline:none;transition:all var(--t2);
+}
+.cta-form-inline input::placeholder{color:var(--stone);}
+.cta-form-inline input:focus{border-color:var(--gold-border);box-shadow:0 0 0 3px var(--gold-dim);}
+.cta-form-inline .btn{justify-content:center;width:100%;}
+
+.cta-confirmation{display:none;text-align:center;padding:var(--s8) var(--s4);}
+.cta-confirmation .check-icon{
+  width:48px;height:48px;border-radius:50%;background:var(--go-dim);
+  display:inline-flex;align-items:center;justify-content:center;margin-bottom:var(--s4);
+  border:1px solid rgba(22,163,74,0.3);
+}
+.cta-confirmation .check-icon svg{width:24px;height:24px;color:var(--go);}
+.cta-confirmation h4{font-family:var(--display);font-size:24px;color:var(--cream);line-height:1;margin-bottom:var(--s3);}
+.cta-confirmation p{font-family:var(--body);font-weight:300;font-size:14px;color:var(--stone-light);line-height:1.6;}
+.cta-confirmation .explore-link{color:var(--gold);font-weight:400;margin-top:var(--s3);display:inline-block;}
+
+.cta-separator{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:0 var(--s6);position:relative;
+}
+.cta-separator-line{width:1px;flex:1;background:var(--ink-3);}
+.cta-separator-circle{
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--ink-3);
+  background:var(--ink-2);display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;color:var(--stone);margin:var(--s3) 0;
+}
+
+.cta-wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:var(--s3);
+  padding:14px 20px;background:#25D366;color:#fff;border-radius:var(--r1);
+  font-family:var(--body);font-size:14px;font-weight:600;
+  text-decoration:none;transition:all var(--t2);margin-bottom:var(--s3);
+}
+.cta-wa-btn:hover{background:#20BD5A;}
+.cta-wa-btn svg{width:18px;height:18px;}
+
+.cta-email-btn{
+  display:flex;align-items:center;justify-content:center;gap:var(--s3);
+  padding:13px 20px;background:transparent;border:1px solid var(--ink-4);border-radius:var(--r1);
+  font-family:var(--body);font-size:14px;font-weight:400;color:var(--cream-2);
+  text-decoration:none;transition:all var(--t2);margin-bottom:var(--s5);
+}
+.cta-email-btn:hover{border-color:var(--gold-border);color:var(--cream);}
+.cta-email-btn svg{width:16px;height:16px;color:var(--stone-light);}
+
+.cta-option-small{font-family:var(--mono);font-size:10px;color:var(--stone);letter-spacing:0.04em;}
+
+@media(max-width:900px){
+  .cta-guarantees-grid{grid-template-columns:1fr;}
+  .cta-options-grid{grid-template-columns:1fr;gap:var(--s4);}
+  .cta-separator{flex-direction:row;padding:var(--s3) 0;}
+  .cta-separator-line{width:auto;height:1px;flex:1;}
+  .cta-separator-circle{margin:0 var(--s3);}
+}
+
+/* ═══ FOOTER ═══ */
+footer{padding:var(--s8) 0;position:relative;}
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-border) 30%,var(--gold-border) 70%,transparent);
+}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--s6);flex-wrap:wrap;}
+.footer-year{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--stone);}
+.footer-links{display:flex;gap:var(--s6);list-style:none;}
+.footer-links a{font-family:var(--body);font-size:13px;color:var(--stone-light);transition:color var(--t2);}
+.footer-links a:hover{color:var(--gold);}
+.footer-social{display:flex;gap:var(--s3);}
+.footer-social a{
+  width:32px;height:32px;border:1px solid var(--ink-4);border-radius:var(--r1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--stone-light);transition:all var(--t2);
+}
+.footer-social a:hover{border-color:var(--gold-border);color:var(--gold);}
+.footer-social svg{width:14px;height:14px;}
+@media(max-width:640px){.footer-inner{justify-content:center;text-align:center;}}
+
+/* Responsive fine-tuning */
+@media(max-width:480px){
+  section{padding:var(--s16) 0;}
+  .hero h1{font-size:52px;}
+  .hero-stats{gap:var(--s4);}
+}
+
+/* Accessibility */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ GLOWS / BACKGROUND ═══ -->
+<div class="amb amb-1" aria-hidden="true"></div>
+<div class="amb amb-2" aria-hidden="true"></div>
+<canvas id="grain" aria-hidden="true"></canvas>
+
+<!-- ═══ LOADER ═══ -->
+<div id="loader" aria-hidden="true">
+  <div id="loader-top"><span id="loader-text">OPSPILOT</span></div>
+  <div id="loader-bottom"><span id="loader-text">OPSPILOT</span></div>
+</div>
+
+<!-- ═══ CURSOR ═══ -->
+<div id="c" aria-hidden="true"></div>
+<div id="cf" aria-hidden="true"></div>
+
+<!-- ═══ SVG DEFS (hidden) ═══ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- arrow-diag -->
+    <symbol id="i-arrow" viewBox="0 0 16 16"><line x1="3" y1="13" x2="13" y2="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="6,3 13,3 13,10" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- play -->
+    <symbol id="i-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14" fill="currentColor"/></symbol>
+    <!-- clock industrial -->
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="5"/><line x1="21" y1="12" x2="19" y2="12"/><line x1="12" y1="21" x2="12" y2="19"/><line x1="3" y1="12" x2="5" y2="12"/><line x1="12" y1="12" x2="8" y2="8"/><line x1="12" y1="12" x2="15" y2="14"/></symbol>
+    <!-- margin bars -->
+    <symbol id="i-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="14" width="4" height="7"/><rect x="10" y="10" width="4" height="11"/><rect x="17" y="5" width="4" height="16"/><polyline points="14,3 21,3 21,10"/><line x1="21" y1="3" x2="14" y2="10"/></symbol>
+    <!-- client person + chat -->
+    <symbol id="i-client" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 5h5a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-1l-2 2v-2h-2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/><circle cx="16" cy="8" r="0.5" fill="currentColor"/><circle cx="18" cy="8" r="0.5" fill="currentColor"/><circle cx="20" cy="8" r="0.5" fill="currentColor"/></symbol>
+    <!-- AI circuit -->
+    <symbol id="i-ai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="9" x2="6" y2="3"/><line x1="12" y1="9" x2="18" y2="3"/><line x1="12" y1="15" x2="6" y2="21"/><line x1="12" y1="15" x2="18" y2="21"/><circle cx="6" cy="3" r="1.2" fill="currentColor"/><circle cx="18" cy="3" r="1.2" fill="currentColor"/><circle cx="6" cy="21" r="1.2" fill="currentColor"/><circle cx="18" cy="21" r="1.2" fill="currentColor"/><path d="M6 3 Q 12 7 18 3" opacity="0.5"/></symbol>
+    <!-- signature pen -->
+    <symbol id="i-sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 L20 8 L10 18 L4 20 L6 14 Z"/><line x1="14" y1="6" x2="18" y2="10"/><path d="M4 22 Q 7 19 10 22 T 16 22" opacity="0.7"/></symbol>
+    <!-- portal window + arrow -->
+    <symbol id="i-portal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="12" rx="2"/><line x1="3" y1="8" x2="17" y2="8"/><circle cx="5.5" cy="6" r="0.5" fill="currentColor"/><circle cx="7.5" cy="6" r="0.5" fill="currentColor"/><circle cx="9.5" cy="6" r="0.5" fill="currentColor"/><line x1="14" y1="11" x2="21" y2="4"/><polyline points="16,4 21,4 21,9"/></symbol>
+    <!-- OCR camera + text -->
+    <symbol id="i-ocr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/><polyline points="4,15 4,19 8,19"/><polyline points="16,19 20,19 20,15"/><line x1="7" y1="17" x2="13" y2="17"/><line x1="7" y1="20" x2="10" y2="20"/></symbol>
+    <!-- stages nodes -->
+    <symbol id="i-stages" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><circle cx="4" cy="12" r="2" fill="currentColor"/><circle cx="10" cy="12" r="2.5"/><circle cx="10" cy="12" r="1" fill="currentColor"/><circle cx="16" cy="12" r="2"/><circle cx="20" cy="12" r="2"/></symbol>
+    <!-- lock -->
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><polyline points="10,15 11.5,16.5 14,14"/></symbol>
+    <!-- check circle -->
+    <symbol id="i-check-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8,12.5 11,15 16,9.5"/></symbol>
+    <!-- x circle -->
+    <symbol id="i-x-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></symbol>
+    <!-- check -->
+    <symbol id="i-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,8 7,12 13,4"/></symbol>
+    <!-- dash -->
+    <symbol id="i-dash" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="8" x2="12" y2="8"/></symbol>
+    <!-- star -->
+    <symbol id="i-star" viewBox="0 0 16 16"><polygon points="8,1 10,6 15,6 11,9.5 12.5,15 8,12 3.5,15 5,9.5 1,6 6,6" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></symbol>
+    <!-- plus -->
+    <symbol id="i-plus" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></symbol>
+    <!-- info -->
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.5" fill="currentColor"/></symbol>
+    <!-- calendar -->
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <!-- credit card -->
+    <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="14" x2="10" y2="14"/></symbol>
+    <!-- envelope -->
+    <symbol id="i-envelope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></symbol>
+    <!-- socials -->
+    <symbol id="i-tw" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></symbol>
+    <symbol id="i-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <a href="#" class="logo"><span class="logo-dot"></span>OPSPILOT</a>
+    <ul class="nav-links">
+      <li><a href="#features">Funciones</a></li>
+      <li><a href="#how">Cómo funciona</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#vs-competition">Comparativa</a></li>
+      <li><a href="#pricing">Precios</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#cta" class="btn btn-primary btn-magnetic" aria-label="Empezar prueba gratis">
+      Empezar gratis
+      <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ═══ HERO (FIX 3) ═══ -->
+<header class="hero">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="hero-bg-glow" aria-hidden="true"></div>
+  <span class="section-num">— 01 —</span>
+
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow t-label">Software para profesionales de la reforma</div>
+        <h1>
+          <span class="line">PRESUPUESTA</span>
+          <span class="line accent">EN MINUTOS</span>
+          <span class="line outline">NO EN HORAS</span>
+        </h1>
+        <div class="hero-rule" aria-hidden="true"></div>
+        <p class="t-body-lg hero-body">Deja de perder tardes calculando a mano. Con <strong>IA integrada, firma digital</strong> y portal del cliente, cierras obras más rápido y con más margen.</p>
+        <div class="hero-cta-group">
+          <a href="#cta" class="btn btn-primary btn-magnetic">
+            Empezar gratis
+            <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+          <a href="#how" class="btn btn-ghost">
+            <svg width="12" height="12" aria-hidden="true"><use href="#i-play"/></svg>
+            Ver cómo funciona
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stats-item">
+            <span class="t-data-lg accent"><span data-counter data-value="10" data-suffix="x">0x</span></span>
+            <span class="t-body-sm">más rápido</span>
+          </div>
+          <span class="hero-stats-divider"></span>
+          <div class="hero-stats-item">
+            <span class="t-data-lg accent">+<span data-counter data-value="31" data-suffix="%">0%</span></span>
+            <span class="t-body-sm">de margen medio</span>
+          </div>
+          <span class="hero-stats-divider"></span>
+          <div class="hero-stats-item">
+            <span class="t-data-lg accent">0&#8364;</span>
+            <span class="t-body-sm">para empezar</span>
+          </div>
+        </div>
+        <div class="hero-social-proof">
+          <div class="hero-sp-metric"><span class="sp-num"><span data-counter data-value="847">0</span></span> presupuestos este mes</div>
+          <span class="hero-sp-dot"></span>
+          <div class="hero-sp-metric"><span class="sp-num"><span data-counter data-value="213">0</span></span> profesionales activos</div>
+          <span class="hero-sp-dot"></span>
+          <div class="hero-sp-metric"><span class="sp-num"><span data-counter data-value="3.2" data-suffix="M€">0M€</span></span> presupuestados</div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-visual-grid" aria-hidden="true"></div>
+
+        <!-- SCREEN PRIMARY (FIX 3) -->
+        <div class="screen screen-primary" aria-hidden="true">
+          <div class="screen-head"><div class="screen-dots"><span></span><span></span><span></span></div><span class="screen-head-label">presupuesto_2026-042.pdf</span></div>
+          <div class="screen-body">
+            <div class="sp-sub-header">
+              <span class="sp-badge">PRESUPUESTO</span>
+              <span class="sp-ref">REF-2026-0042</span>
+            </div>
+            <div class="sp-client">Reforma bano completo</div>
+            <div class="sp-address">Garcia Lopez &middot; C/ Mayor 24 &middot; Madrid</div>
+            <div class="sp-status-bar">
+              <span>BORRADOR</span>
+              <span class="sp-status-arrow">&rarr;</span>
+              <span class="sp-status-current">ENVIADO</span>
+              <span class="sp-status-arrow">&rarr;</span>
+              <span>FIRMADO</span>
+            </div>
+            <div class="sp-items">
+              <div class="sp-item highlight">
+                <span class="sp-item-icon"><svg width="16" height="16"><use href="#i-ai"/></svg></span>
+                <span class="sp-item-body"><span class="sp-item-name">Demolicion y retirada escombros <span class="sp-ia-badge">IA</span></span><span class="sp-item-detail">12 M2 &middot; 6H MO</span></span>
+                <span class="sp-item-price">480,00&#8364;</span>
+              </div>
+              <div class="sp-item">
+                <span class="sp-item-icon"><svg width="16" height="16"><use href="#i-stages"/></svg></span>
+                <span class="sp-item-body"><span class="sp-item-name">Instalacion fontaneria</span><span class="sp-item-detail">1 UD &middot; 8H MO</span></span>
+                <span class="sp-item-price">1.240,00&#8364;</span>
+              </div>
+              <div class="sp-item">
+                <span class="sp-item-icon"><svg width="16" height="16"><use href="#i-bars"/></svg></span>
+                <span class="sp-item-body"><span class="sp-item-name">Alicatado porcelanico</span><span class="sp-item-detail">28 M2 &middot; 14H MO</span></span>
+                <span class="sp-item-price">1.960,00&#8364;</span>
+              </div>
+              <div class="sp-item">
+                <span class="sp-item-icon"><svg width="16" height="16"><use href="#i-ocr"/></svg></span>
+                <span class="sp-item-body"><span class="sp-item-name">Sanitarios y griferia</span><span class="sp-item-detail">1 LOTE &middot; ALBARAN</span></span>
+                <span class="sp-item-price">1.850,00&#8364;</span>
+              </div>
+            </div>
+            <div class="sp-iva-row">
+              <span>IVA 21%</span>
+              <span>1.161,30&#8364;</span>
+            </div>
+            <div class="sp-total">
+              <span class="sp-total-label">Total &middot; IVA inc.</span>
+              <span class="sp-total-value">6.691,30&#8364;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN SECONDARY - SIGNATURE (FIX 3) -->
+        <div class="screen screen-secondary" aria-hidden="true">
+          <div class="screen-head"><div class="screen-dots"><span></span><span></span><span></span></div></div>
+          <div class="screen-body">
+            <div class="ss-title">FIRMA DIGITAL &middot; eIDAS</div>
+            <div class="ss-name">J. Garcia Lopez</div>
+            <div class="ss-sigbox">
+              <svg viewBox="0 0 160 60" width="100%" height="36" aria-hidden="true">
+                <path d="M10 50 C20 20, 40 15, 55 35 S80 55, 100 45 S130 25, 150 40" fill="none" stroke="#E8A020" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <button class="ss-btn">
+              <svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>
+              Presupuesto aceptado
+            </button>
+            <div class="ss-date">06 abr 2026 &middot; 14:32h</div>
+          </div>
+        </div>
+
+        <!-- SCREEN TERTIARY - PROJECT STATUS (FIX 3) -->
+        <div class="screen screen-tertiary" aria-hidden="true">
+          <div class="screen-head"><div class="screen-dots"><span></span><span></span><span></span></div></div>
+          <div class="screen-body">
+            <div class="st-title">ESTADO DE OBRA</div>
+            <div class="st-obra">Bano Garcia</div>
+            <div class="st-badges">
+              <span class="badge badge-go">En ejecucion</span>
+              <span class="badge badge-gold">Etapa 3/5</span>
+            </div>
+            <div class="progress"><div class="progress-fill"></div></div>
+            <div class="progress-label">65% &middot; 4 dias restantes</div>
+            <div class="st-milestones">
+              <div class="st-milestone done"><span class="ms-icon">&#10003;</span>Demolicion completada</div>
+              <div class="st-milestone active"><span class="ms-icon">&#9679;</span>Fontaneria en curso</div>
+              <div class="st-milestone"><span class="ms-icon">&#9675;</span>Alicatado pendiente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ PAIN SECTION ═══ -->
+<section class="sec-dark">
+  <span class="section-num">— 02 —</span>
+  <div class="wrap">
+    <div class="eyebrow t-label reveal-up">Antes de este software</div>
+    <div class="pain-grid" data-stagger>
+      <article class="pain-card">
+        <span class="pain-num">01</span>
+        <span class="pain-icon"><svg width="24" height="24" aria-hidden="true"><use href="#i-clock"/></svg></span>
+        <h3 class="pain-title">2-4 horas por presupuesto</h3>
+        <p class="pain-desc">Calculadora, Excel, Word, correo... cada presupuesto te roba una tarde entera que podrias estar en obra.</p>
+      </article>
+      <article class="pain-card">
+        <span class="pain-num">02</span>
+        <span class="pain-icon"><svg width="24" height="24" aria-hidden="true"><use href="#i-bars"/></svg></span>
+        <h3 class="pain-title">Margenes que se escapan</h3>
+        <p class="pain-desc">Sin comparar precios reales de compra con lo presupuestado, nunca sabes cuanto ganas realmente.</p>
+      </article>
+      <article class="pain-card">
+        <span class="pain-num">03</span>
+        <span class="pain-icon"><svg width="24" height="24" aria-hidden="true"><use href="#i-client"/></svg></span>
+        <h3 class="pain-title">El cliente siempre pregunta</h3>
+        <p class="pain-desc">En que fase estais? Cuando terminais? Sin un portal propio, respondes por WhatsApp toda la jornada.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FEATURES (FIX 5B) ═══ -->
+<section id="features">
+  <span class="section-num">— 03 —</span>
+  <div class="wrap">
+    <header class="section-head">
+      <div class="eyebrow t-label reveal-up">Funciones</div>
+      <h2 class="t-display-lg reveal-up">TODO LO QUE<br><span class="accent">NECESITAS</span></h2>
+    </header>
+    <div class="feat-grid" data-stagger>
+      <article class="feat-card feat-big">
+        <div>
+          <span class="feat-icon"><svg width="44" height="44" aria-hidden="true"><use href="#i-ai"/></svg></span>
+          <h3>IA integrada</h3>
+          <p>Dicta el trabajo por voz y la IA crea las partidas automaticamente. Genera descomposiciones, sugiere materiales y aprende de tus obras anteriores.</p>
+          <span class="feat-big-tag">IA real &middot; no plantillas</span>
+        </div>
+        <div class="feat-mock" aria-hidden="true">
+          <div class="feat-mock-title">Descomposicion &middot; Alicatado 28m2</div>
+          <div class="feat-mock-row"><span class="feat-mock-dot m"></span><span class="feat-mock-label">Material ceramico</span><span class="feat-mock-val">812,00&#8364;</span></div>
+          <div class="feat-mock-row"><span class="feat-mock-dot l"></span><span class="feat-mock-label">Mano de obra &middot; 14h</span><span class="feat-mock-val">840,00&#8364;</span></div>
+          <div class="feat-mock-row"><span class="feat-mock-dot e"></span><span class="feat-mock-label">Maquinaria y auxiliares</span><span class="feat-mock-val">140,00&#8364;</span></div>
+          <div class="feat-mock-row"><span class="feat-mock-dot x"></span><span class="feat-mock-label">Cemento cola + rejuntado</span><span class="feat-mock-val">168,00&#8364;</span></div>
+          <div class="feat-mock-row"><span class="feat-mock-dot g"></span><span class="feat-mock-label">Medios auxiliares (2%)</span><span class="feat-mock-val">39,20&#8364;</span></div>
+          <div class="feat-mock-row"><span class="feat-mock-dot g"></span><span class="feat-mock-label">Beneficio industrial (6%)</span><span class="feat-mock-val">117,60&#8364;</span></div>
+          <div class="feat-mock-sep"></div>
+          <div class="feat-mock-total"><span class="feat-mock-total-label">Total partida</span><span class="feat-mock-total-val">2.116,80&#8364;<span class="feat-mock-perm2">75,60&#8364;/m2</span></span></div>
+        </div>
+      </article>
+      <article class="feat-card feat-small">
+        <span class="feat-icon"><svg width="32" height="32" aria-hidden="true"><use href="#i-sign"/></svg></span>
+        <h3>Firma digital legal</h3>
+        <p>El cliente firma desde su movil con verificacion por SMS. Cumple eIDAS. Sin impresoras, sin esperas.</p>
+      </article>
+      <article class="feat-card feat-small">
+        <span class="feat-icon"><svg width="32" height="32" aria-hidden="true"><use href="#i-portal"/></svg></span>
+        <h3>Portal del cliente</h3>
+        <p>Cada cliente tiene su URL donde ve el estado de la obra, las fotos y las etapas en tiempo real.</p>
+      </article>
+      <article class="feat-card feat-small">
+        <span class="feat-icon"><svg width="32" height="32" aria-hidden="true"><use href="#i-ocr"/></svg></span>
+        <h3>Control de materiales</h3>
+        <p>Registra albaranes con el movil. OCR automatico. Compara comprado vs presupuestado.</p>
+      </article>
+      <article class="feat-card feat-small">
+        <span class="feat-icon"><svg width="32" height="32" aria-hidden="true"><use href="#i-stages"/></svg></span>
+        <h3>Plan de obra con IA <span class="feat-badge-new">Nuevo</span></h3>
+        <p>Al aceptar, la IA genera el plan de ejecución por etapas con horas estimadas y fechas.</p>
+      </article>
+      <article class="feat-card feat-medium">
+        <span class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+        <h3>Packs por gremio</h3>
+        <p>Crea paquetes de partidas para tus trabajos más habituales. 'Reforma completa de baño' despliega 8 partidas en un clic. Preconfigurados para fontanería, electricidad, reforma y pintura.</p>
+        <span class="feat-tag">Ahorra 90% del tiempo</span>
+      </article>
+      <article class="feat-card feat-medium">
+        <span class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span>
+        <h3>Compatible con BC3</h3>
+        <p>Importa bases de precios en formato BC3 estándar. Compatible con Presto, CYPE y BEDEC. Busca partidas en bases oficiales como BCCA sin descargar miles de registros.</p>
+        <span class="feat-tag">Estándar del sector</span>
+      </article>
+      <article class="feat-card feat-medium">
+        <span class="feat-icon"><svg width="32" height="32" aria-hidden="true"><use href="#i-bars"/></svg></span>
+        <h3>Rentabilidad real por obra</h3>
+        <p>Compara lo presupuestado vs lo gastado en materiales y mano de obra. Sabe exactamente cuánto ganas en cada obra antes de terminarla. La IA te avisa si el margen baja del objetivo.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW / STEPS ═══ -->
+<section id="how" class="sec-dark steps-section">
+  <span class="section-num">— 04 —</span>
+  <div class="wrap">
+    <header class="section-head">
+      <div class="eyebrow t-label reveal-up">Cómo funciona</div>
+      <h2 class="t-display-lg reveal-up">DE VISITA A<br><span class="accent">PRESUPUESTO</span><br>EN 4 PASOS</h2>
+    </header>
+    <div class="steps-wrap">
+      <svg class="timeline-svg" preserveAspectRatio="none" aria-hidden="true">
+        <line class="timeline-line" x1="0" y1="24" x2="100%" y2="24" stroke="#E8A020" stroke-width="1" stroke-dasharray="1000" stroke-dashoffset="1000" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      <div class="steps-grid" data-stagger>
+        <div class="step step-done">
+          <div class="step-node"></div>
+          <div class="step-num">01</div>
+          <h3 class="step-title">Toma las medidas</h3>
+          <p class="step-desc">Dicta el trabajo por voz o escribelo. La IA ya sabe que partidas y materiales son.</p>
+        </div>
+        <div class="step step-active">
+          <div class="step-node"></div>
+          <div class="step-num">02</div>
+          <h3 class="step-title">Revisa el presupuesto</h3>
+          <p class="step-desc">Las partidas, precios y cantidades aparecen al instante. Ajusta lo que necesites.</p>
+        </div>
+        <div class="step">
+          <div class="step-node"></div>
+          <div class="step-num">03</div>
+          <h3 class="step-title">El cliente firma</h3>
+          <p class="step-desc">Envia el link por WhatsApp. El cliente lo revisa y firma digitalmente desde su movil.</p>
+        </div>
+        <div class="step">
+          <div class="step-node"></div>
+          <div class="step-num">04</div>
+          <h3 class="step-title">Obra en marcha</h3>
+          <p class="step-desc">La IA genera el plan de obra. El cliente sigue el avance desde su portal. Tu a trabajar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMPARE ═══ -->
+<section>
+  <span class="section-num">— 05 —</span>
+  <div class="wrap">
+    <header class="section-head">
+      <div class="eyebrow t-label reveal-up">Comparativa</div>
+      <h2 class="t-display-lg reveal-up">EL CAMBIO<br><span class="accent">ES REAL</span></h2>
+    </header>
+    <div class="cmp-grid">
+      <div class="cmp-col bad reveal-left">
+        <div class="cmp-head">
+          <svg width="20" height="20" aria-hidden="true"><use href="#i-x-c"/></svg>
+          <h3>Sin el software</h3>
+        </div>
+        <ul class="cmp-list">
+          <li><svg aria-hidden="true"><use href="#i-dash"/></svg>2-4 horas calculando cada presupuesto a mano en Excel</li>
+          <li><svg aria-hidden="true"><use href="#i-dash"/></svg>Copias y pegas partidas de presupuestos anteriores</li>
+          <li><svg aria-hidden="true"><use href="#i-dash"/></svg>Imprimes, firmas, escaneas y envias por correo</li>
+          <li><svg aria-hidden="true"><use href="#i-dash"/></svg>El cliente te llama por WhatsApp preguntando el avance</li>
+          <li><svg aria-hidden="true"><use href="#i-dash"/></svg>No sabes si ganaste o perdiste hasta terminar la obra</li>
+          <li><svg aria-hidden="true"><use href="#i-dash"/></svg>Mezclas albaranes de proveedores en una carpeta</li>
+        </ul>
+      </div>
+      <div class="cmp-col good reveal-right">
+        <div class="cmp-head">
+          <svg width="20" height="20" aria-hidden="true"><use href="#i-check-c"/></svg>
+          <h3>Con el software</h3>
+        </div>
+        <ul class="cmp-list">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>15 minutos por presupuesto dictando por voz en obra</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>La IA genera partidas y precios de forma automatica</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Firma digital con eIDAS desde el movil del cliente</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Cliente ve avance y fotos en su portal 24/7</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Ves el margen real de cada obra en tiempo real</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>OCR lee los albaranes y los asigna a la obra</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VS COMPETITION ═══ -->
+<section id="vs-competition">
+  <span class="section-num">— 06 —</span>
+  <div class="wrap">
+    <header class="section-head" style="text-align:center;">
+      <div class="eyebrow t-label reveal-up">VS Alternativas</div>
+      <h2 class="t-display-lg reveal-up">POR QUÉ NO<br>SEGUIR<br><span class="accent">CON CYPE</span></h2>
+      <p class="t-body reveal-up" style="color:var(--cream-2);max-width:560px;margin:var(--s6) auto 0;">Si ya usas software de presupuestos, aquí está lo que te estás perdiendo.</p>
+    </header>
+    <div class="vs-table-wrap reveal-up">
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Excel / Word</th>
+            <th>CYPE / Presto</th>
+            <th class="vs-highlight">OPSPILOT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="vs-feature">Tiempo por presupuesto</td>
+            <td>2–4 horas</td>
+            <td>45–90 min</td>
+            <td class="vs-highlight vs-gold">10–15 min</td>
+          </tr>
+          <tr>
+            <td class="vs-feature">Firma digital legal</td>
+            <td><span class="vs-cross">✗</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td class="vs-highlight"><span class="vs-check">✓ eIDAS</span></td>
+          </tr>
+          <tr>
+            <td class="vs-feature">Portal del cliente</td>
+            <td><span class="vs-cross">✗</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td class="vs-highlight"><span class="vs-check">✓ URL propia</span></td>
+          </tr>
+          <tr>
+            <td class="vs-feature">IA que genera partidas</td>
+            <td><span class="vs-cross">✗</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td class="vs-highlight"><span class="vs-check">✓ por voz</span></td>
+          </tr>
+          <tr>
+            <td class="vs-feature">Control de obra</td>
+            <td><span class="vs-cross">✗</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td class="vs-highlight"><span class="vs-check">✓ etapas+fotos</span></td>
+          </tr>
+          <tr>
+            <td class="vs-feature">Compatible BC3</td>
+            <td>Parcial</td>
+            <td><span class="vs-check">✓</span></td>
+            <td class="vs-highlight"><span class="vs-check">✓</span></td>
+          </tr>
+          <tr class="vs-price-row">
+            <td class="vs-feature">Precio mensual</td>
+            <td>0€ (manual)</td>
+            <td>80–300€</td>
+            <td class="vs-highlight">29–59€</td>
+          </tr>
+          <tr>
+            <td class="vs-feature">Curva de aprendizaje</td>
+            <td>Ninguna</td>
+            <td>Alta</td>
+            <td class="vs-highlight"><span class="vs-gold">Ninguna</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="vs-footnote">*Precios CYPE orientativos según plan oficial. OpsPilot incluye IA, portal cliente y control de obra en todos los planes.</p>
+  </div>
+</section>
+
+<!-- ═══ INTERACTIVE DEMO (4-ACT FLOW) ═══ -->
+<section id="demo" class="sec-dark">
+  <span class="section-num">— 07 —</span>
+  <div class="wrap">
+    <header class="section-head" style="text-align:center;">
+      <div class="eyebrow t-label reveal-up">Demo interactiva</div>
+      <h2 class="t-display-lg reveal-up">VIVE EL FLUJO<br><span class="accent">COMPLETO</span></h2>
+      <p class="t-body-lg reveal-up" style="color:var(--cream-2);max-width:640px;margin:var(--s6) auto 0;">Desde la voz del profesional hasta el portal del cliente. 4 actos, cero humo.</p>
+    </header>
+
+    <div class="demo-shell" id="demoShell">
+      <!-- Tab bar -->
+      <div class="demo-tabs" id="demoTabs">
+        <button class="demo-tab active" data-act="1">01 · Dictar obra<span class="demo-tab-progress" id="tabProg1"></span></button>
+        <button class="demo-tab" data-act="2">02 · Presupuesto<span class="demo-tab-progress" id="tabProg2"></span></button>
+        <button class="demo-tab" data-act="3">03 · Firma<span class="demo-tab-progress" id="tabProg3"></span></button>
+        <button class="demo-tab" data-act="4">04 · Portal<span class="demo-tab-progress" id="tabProg4"></span></button>
+      </div>
+
+      <!-- Stage -->
+      <div class="demo-stage" id="demoStage">
+
+        <!-- ACT 01 — DICTAR OBRA -->
+        <div class="demo-act active act01-layout" id="demoAct1" data-act="1">
+          <div class="demo-phone" id="act01Phone">
+            <div class="demo-phone-notch"></div>
+            <div class="demo-phone-screen">
+              <div class="act01-header">OpsPilot · Nuevo presupuesto</div>
+              <div class="act01-placeholder" id="act01Placeholder">Añadir partidas...</div>
+              <div class="act01-mic" id="act01Mic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              </div>
+              <div class="act01-mic-label" id="act01MicLabel">Mantén pulsado para dictar</div>
+              <div class="act01-visualizer" id="act01Viz"></div>
+              <div class="act01-dictation" id="act01Dictation"></div>
+              <div class="act01-processing" id="act01Processing">
+                <div class="act01-spinner"></div>
+                <span class="act01-processing-text">IA procesando...</span>
+              </div>
+              <div class="act01-items" id="act01Items"></div>
+              <div class="act01-total" id="act01Total">
+                <span class="act01-total-label">Total</span>
+                <span class="act01-total-value" id="act01TotalVal">0€</span>
+              </div>
+            </div>
+          </div>
+          <div class="demo-context" id="act01Context">
+            <div class="demo-context-title">Lo que está pasando</div>
+            <div class="demo-context-event" id="ctx01Evt1"><span class="demo-context-dot"></span>Voz recibida</div>
+            <div class="demo-context-event" id="ctx01Evt2"><span class="demo-context-dot"></span>IA analizando contexto</div>
+            <div class="demo-context-event" id="ctx01Evt3"><span class="demo-context-dot"></span>Precios de mercado consultados</div>
+            <div class="demo-context-event" id="ctx01Evt4"><span class="demo-context-dot"></span>Base de datos empresa aplicada</div>
+            <div class="demo-context-event" id="ctx01Evt5"><span class="demo-context-dot"></span>5 partidas generadas en 3.2s</div>
+            <div class="demo-context-badge" id="ctx01Badge">✓ Listo en 3.2 segundos</div>
+          </div>
+        </div>
+
+        <!-- ACT 02 — PRESUPUESTO -->
+        <div class="demo-act act02-layout" id="demoAct2" data-act="2">
+          <div class="act02-browser">
+            <div class="act02-browser-bar">
+              <div class="act02-browser-dots"><span></span><span></span><span></span></div>
+              <div class="act02-browser-url">app.opspilot.es/presupuesto/2026-042</div>
+            </div>
+            <div class="act02-body">
+              <div class="act02-left">
+                <div class="act02-header-row">
+                  <span class="act02-title">Presupuesto 2026-042 · Reforma baño García</span>
+                  <div class="act02-chips">
+                    <span class="act02-status-chip active">Borrador</span>
+                    <span class="act02-status-chip">Enviado</span>
+                    <span class="act02-status-chip">Firmado</span>
+                  </div>
+                </div>
+                <div id="act02Items">
+                  <div class="act02-item" data-idx="0">
+                    <span class="act02-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="act02-item-info"><span class="act02-item-name">Demolición y retirada escombros</span><span class="act02-item-desc">Retirada + limpieza + transporte</span></span>
+                    <input class="act02-item-qty" type="number" value="12" min="1" data-base="40">
+                    <span class="act02-item-unit">m²</span>
+                    <span class="act02-item-total">480€</span>
+                    <button class="act02-item-del">×</button>
+                  </div>
+                  <div class="act02-item" data-idx="1">
+                    <span class="act02-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="act02-item-info"><span class="act02-item-name">Alicatado porcelánico 60×60</span><span class="act02-item-desc">Material + MO 11h</span></span>
+                    <input class="act02-item-qty" type="number" value="22" min="1" data-base="89.09">
+                    <span class="act02-item-unit">m²</span>
+                    <span class="act02-item-total">1.960€</span>
+                    <button class="act02-item-del">×</button>
+                  </div>
+                  <div class="act02-item" data-idx="2">
+                    <span class="act02-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="act02-item-info"><span class="act02-item-name">Cambio completo sanitarios</span><span class="act02-item-desc">Kit completo</span></span>
+                    <input class="act02-item-qty" type="number" value="1" min="1" data-base="1240">
+                    <span class="act02-item-unit">ud</span>
+                    <span class="act02-item-total">1.240€</span>
+                    <button class="act02-item-del">×</button>
+                  </div>
+                  <div class="act02-item" data-idx="3">
+                    <span class="act02-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="act02-item-info"><span class="act02-item-name">Instalación fontanería</span><span class="act02-item-desc">8h MO</span></span>
+                    <input class="act02-item-qty" type="number" value="1" min="1" data-base="890">
+                    <span class="act02-item-unit">ud</span>
+                    <span class="act02-item-total">890€</span>
+                    <button class="act02-item-del">×</button>
+                  </div>
+                  <div class="act02-item" data-idx="4">
+                    <span class="act02-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="act02-item-info"><span class="act02-item-name">Pintura interior baño</span><span class="act02-item-desc">2 manos</span></span>
+                    <input class="act02-item-qty" type="number" value="18" min="1" data-base="30">
+                    <span class="act02-item-unit">m²</span>
+                    <span class="act02-item-total">540€</span>
+                    <button class="act02-item-del">×</button>
+                  </div>
+                </div>
+                <button class="act02-add-btn" id="act02AddBtn">+ Añadir partida</button>
+              </div>
+              <div class="act02-right">
+                <div class="act02-summary-title">RESUMEN</div>
+                <div class="act02-bar-row">
+                  <span class="act02-bar-label">Mano de obra</span>
+                  <div class="act02-bar"><div class="act02-bar-fill mo" id="act02BarMo" style="width:44%"></div></div>
+                  <span class="act02-bar-val" id="act02ValMo">2.240€</span>
+                </div>
+                <div class="act02-bar-row">
+                  <span class="act02-bar-label">Materiales</span>
+                  <div class="act02-bar"><div class="act02-bar-fill mat" id="act02BarMat" style="width:39%"></div></div>
+                  <span class="act02-bar-val" id="act02ValMat">2.012€</span>
+                </div>
+                <div class="act02-bar-row">
+                  <span class="act02-bar-label">Varios</span>
+                  <div class="act02-bar"><div class="act02-bar-fill misc" id="act02BarMisc" style="width:17%"></div></div>
+                  <span class="act02-bar-val" id="act02ValMisc">858€</span>
+                </div>
+                <div class="act02-totals" id="act02Totals">
+                  <div class="act02-total-row"><span>Subtotal</span><span id="act02Sub">5.110€</span></div>
+                  <div class="act02-total-row"><span>IVA (21%)</span><span id="act02Iva">1.073€</span></div>
+                  <div class="act02-total-row grand"><span>Total</span><span id="act02Grand">6.183€</span></div>
+                </div>
+                <div class="act02-margin">
+                  <div class="act02-margin-label">Margen estimado</div>
+                  <div class="act02-margin-value" id="act02MarginVal">28%</div>
+                  <div class="act02-margin-traffic">● Saludable</div>
+                  <div class="act02-margin-bar"><div class="act02-margin-marker" id="act02MarginMarker" style="left:28%"></div></div>
+                  <div class="act02-margin-note">Basado en tus costes reales de MO y materiales de las últimas 8 obras.</div>
+                </div>
+                <button class="act02-pdf-btn" id="act02PdfBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Exportar PDF</button>
+                <div class="act02-pdf-progress" id="act02PdfProgress"><div class="act02-pdf-progress-fill" id="act02PdfFill"></div></div>
+                <div class="act02-pdf-done" id="act02PdfDone">PDF generado ✓</div>
+                <button class="act02-send-btn" id="act02SendBtn">Enviar para firma →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACT 03 — FIRMA DIGITAL -->
+        <div class="demo-act act03-layout" id="demoAct3" data-act="3">
+          <div class="demo-phone" id="act03Phone">
+            <div class="demo-phone-notch"></div>
+            <div class="demo-phone-screen">
+              <!-- Phase 1: Lock screen -->
+              <div class="act03-lockscreen" id="act03Lock">
+                <div class="act03-time">14:32</div>
+                <div class="act03-notif">
+                  <div class="act03-notif-icon">
+                    <svg viewBox="0 0 24 24" fill="white" width="20" height="20">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                  </div>
+                  <div class="act03-notif-body">
+                    <div class="act03-notif-sender">Carlos (Reformas)</div>
+                    <div class="act03-notif-text">Tu presupuesto está listo. Pulsa para revisar y firmar</div>
+                  </div>
+                </div>
+                <button class="act03-view-btn" id="act03ViewBtn">Ver presupuesto</button>
+              </div>
+              <!-- Phase 2: Budget view -->
+              <div class="act03-budget-view" id="act03Budget">
+                <div class="act03-budget-header">
+                  <span class="act03-budget-logo">OpsPilot</span>
+                  <span class="act03-budget-ref">Presupuesto 2026-042</span>
+                </div>
+                <div class="act03-budget-client">Sr. García · C/ Mayor 24, Madrid</div>
+                <div class="act03-budget-items">
+                  <div class="act03-budget-item"><span>Demolición y retirada</span><span class="act03-budget-item-price">480€</span></div>
+                  <div class="act03-budget-item"><span>Alicatado porcelánico 60×60</span><span class="act03-budget-item-price">1.960€</span></div>
+                  <div class="act03-budget-item"><span>Cambio sanitarios</span><span class="act03-budget-item-price">1.240€</span></div>
+                  <div class="act03-budget-item"><span>Instalación fontanería</span><span class="act03-budget-item-price">890€</span></div>
+                  <div class="act03-budget-item"><span>Pintura interior</span><span class="act03-budget-item-price">540€</span></div>
+                </div>
+                <div class="act03-budget-total">
+                  <span class="act03-budget-total-label">Total (IVA incl.)</span>
+                  <span class="act03-budget-total-val">6.183€</span>
+                </div>
+                <button class="act03-sign-btn" id="act03SignBtn">Firmar presupuesto →</button>
+              </div>
+              <!-- Phase 3: Signature -->
+              <div class="act03-signature-view" id="act03Signature">
+                <div class="act03-sig-area" id="act03SigArea">
+                  <span class="act03-sig-placeholder">Firma aquí</span>
+                  <svg class="act03-sig-svg" viewBox="0 0 160 100" preserveAspectRatio="none">
+                    <path id="act03SigPath" d="M10,50 C20,20 40,15 55,35 S80,55 100,45 S130,25 150,40"/>
+                  </svg>
+                </div>
+                <div class="act03-confirm" id="act03Confirm">
+                  <div class="act03-checkmark" id="act03Check">✓</div>
+                  <div class="act03-eidas">Firma verificada · eIDAS</div>
+                  <div class="act03-confirm-text" id="act03ConfirmText"></div>
+                  <div class="act03-signed-chip">FIRMADO</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-context" id="act03Context">
+            <div class="demo-context-title">Qué garantiza esta firma</div>
+            <div class="demo-context-event active"><span class="demo-context-dot"></span>Verificación de identidad por email</div>
+            <div class="demo-context-event active"><span class="demo-context-dot"></span>IP y timestamp registrados</div>
+            <div class="demo-context-event active"><span class="demo-context-dot"></span>Cumple Reglamento eIDAS europeo</div>
+            <div class="demo-context-event active"><span class="demo-context-dot"></span>Equivale a firma manuscrita en España</div>
+          </div>
+        </div>
+
+        <!-- ACT 04 — PORTAL DE OBRA -->
+        <div class="demo-act act04-layout" id="demoAct4" data-act="4">
+          <div class="demo-tablet">
+            <div class="act04-header">
+              <div>
+                <div class="act04-company">Reformas García S.L.</div>
+                <div class="act04-subtitle">Portal de seguimiento</div>
+              </div>
+              <div class="act04-live-badge"><span class="act04-live-dot"></span>En ejecución</div>
+            </div>
+            <div class="act04-body">
+              <div class="act04-project-title">Reforma baño · C/ Mayor 24, Madrid</div>
+              <div class="act04-progress-wrap">
+                <div class="act04-progress-bar"><div class="act04-progress-fill" id="act04ProgFill"></div></div>
+                <div class="act04-progress-label"><span id="act04ProgNum">0</span>% completado · 4 días restantes</div>
+              </div>
+              <div class="act04-timeline">
+                <div class="act04-timeline-line-bg"></div>
+                <div class="act04-timeline-line" id="act04TimeLine"></div>
+                <div class="act04-stage completed">
+                  <span class="act04-stage-dot">✓</span>
+                  <div class="act04-stage-name">Demolición</div>
+                  <div class="act04-stage-detail">Completada el 12 Mar</div>
+                  <div class="act04-stage-thumb" style="background:linear-gradient(135deg,#8B5E3C,#D4A574)"></div>
+                </div>
+                <div class="act04-stage completed">
+                  <span class="act04-stage-dot">✓</span>
+                  <div class="act04-stage-name">Fontanería</div>
+                  <div class="act04-stage-detail">Completada el 15 Mar</div>
+                  <div class="act04-stage-thumb" style="background:linear-gradient(135deg,#3B82F6,#60A5FA)"></div>
+                </div>
+                <div class="act04-stage active">
+                  <span class="act04-stage-dot">●</span>
+                  <div class="act04-stage-name">Alicatado</div>
+                  <div class="act04-stage-detail">En ejecución · 2 días estimados</div>
+                  <div class="act04-stage-mini-bar"><div class="act04-stage-mini-fill" style="width:40%"></div></div>
+                </div>
+                <div class="act04-stage">
+                  <span class="act04-stage-dot"></span>
+                  <div class="act04-stage-name">Sanitarios</div>
+                  <div class="act04-stage-detail">Pendiente · Estimado 20 Mar</div>
+                </div>
+                <div class="act04-stage">
+                  <span class="act04-stage-dot"></span>
+                  <div class="act04-stage-name">Pintura</div>
+                  <div class="act04-stage-detail">Pendiente · Estimado 22 Mar</div>
+                </div>
+              </div>
+              <div class="act04-gallery">
+                <div class="act04-gallery-item" style="background:linear-gradient(135deg,#8B5E3C,#D4A574)"><span class="act04-gallery-label">Demolición · 12 Mar</span></div>
+                <div class="act04-gallery-item" style="background:linear-gradient(135deg,#92400E,#F59E0B)"><span class="act04-gallery-label">Demolición · 13 Mar</span></div>
+                <div class="act04-gallery-item" style="background:linear-gradient(135deg,#3B82F6,#60A5FA)"><span class="act04-gallery-label">Fontanería · 15 Mar</span></div>
+                <div class="act04-gallery-item" style="background:linear-gradient(135deg,#2563EB,#7C3AED)"><span class="act04-gallery-label">Fontanería · 16 Mar</span></div>
+                <div class="act04-gallery-item" style="background:linear-gradient(135deg,#D97706,#FDE68A)"><span class="act04-gallery-label">Alicatado · 18 Mar</span></div>
+                <div class="act04-gallery-item" style="background:linear-gradient(135deg,#B45309,#FCD34D)"><span class="act04-gallery-label">Alicatado · 19 Mar</span></div>
+              </div>
+              <button class="act04-contact">Contactar con el profesional →</button>
+            </div>
+          </div>
+          <div class="demo-context" id="act04Context">
+            <div class="demo-context-title">Lo que ve tu cliente</div>
+            <div class="demo-context-event active"><span class="demo-context-dot"></span>Sin WhatsApps preguntando el avance</div>
+            <div class="demo-context-event active"><span class="demo-context-dot"></span>Fotos de cada etapa en tiempo real</div>
+            <div class="demo-context-event active"><span class="demo-context-dot"></span>Incidencias y resoluciones visibles</div>
+            <div class="demo-context-event active"><span class="demo-context-dot"></span>Acta de finalización digital</div>
+            <div class="demo-context-badge visible" style="opacity:1">Tu cliente confía más. Tú trabajas sin interrupciones.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Hint -->
+      <div class="demo-hint" id="demoHint">→ Ahora revisa el presupuesto</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="sec-dark">
+  <span class="section-num">— 08 —</span>
+  <div class="wrap">
+    <header class="section-head">
+      <div class="eyebrow t-label reveal-up">Testimonios</div>
+      <h2 class="t-display-lg reveal-up">PROFESIONALES<br><span class="accent">QUE YA GANAN MÁS</span></h2>
+    </header>
+    <div class="tst-grid" data-stagger>
+      <article class="tst-card">
+        <div class="tst-stars" aria-label="5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+        <p class="tst-quote">"Importé el BC3 de la Junta de Andalucía y en 10 minutos tenía 440 partidas listas en mi catálogo. Antes copiaba partida a partida de presupuesto en presupuesto."</p>
+        <div class="tst-sep"></div>
+        <div class="tst-author">
+          <div class="tst-avatar">M</div>
+          <div><div class="tst-author-name">Miguel T.</div><div class="tst-author-role">Aparejador &middot; Granada</div></div>
+        </div>
+      </article>
+      <article class="tst-card">
+        <div class="tst-stars" aria-label="5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+        <p class="tst-quote">"Me notificó que el cliente había abierto el presupuesto. Le llamé a los 5 minutos y cerré la obra en esa misma llamada. Eso no tiene precio."</p>
+        <div class="tst-sep"></div>
+        <div class="tst-author">
+          <div class="tst-avatar">R</div>
+          <div><div class="tst-author-name">Rosa F.</div><div class="tst-author-role">Reformas integrales &middot; Málaga</div></div>
+        </div>
+      </article>
+      <article class="tst-card">
+        <div class="tst-stars" aria-label="5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+        <p class="tst-quote">"La IA me sugirio subir el precio del alicatado porque en mis ultimas 6 obras habia perdido margen. Llevaba razon."</p>
+        <div class="tst-sep"></div>
+        <div class="tst-author">
+          <div class="tst-avatar">A</div>
+          <div><div class="tst-author-name">Antonio P.</div><div class="tst-author-role">Electricista &middot; Madrid</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+  <span class="section-num">— 09 —</span>
+  <div class="wrap">
+    <header class="section-head">
+      <div class="eyebrow t-label reveal-up">Precios</div>
+      <h2 class="t-display-lg reveal-up">SIN LETRA<br><span class="accent">PEQUEÑA</span></h2>
+    </header>
+    <div class="price-grid" data-stagger>
+      <article class="price-card">
+        <div class="price-name">Basico</div>
+        <div class="price-amount"><span class="num">29</span><span class="cur">&#8364;</span><span class="per">/mes</span></div>
+        <div class="price-sub">Para profesionales autónomos</div>
+        <ul class="price-list">
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Presupuestos ilimitados</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Firma digital con eIDAS</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Portal del cliente</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>PDF profesional con tu logo</li>
+          <li class="no"><svg aria-hidden="true"><use href="#i-dash"/></svg>IA completa</li>
+          <li class="no"><svg aria-hidden="true"><use href="#i-dash"/></svg>Control materiales OCR</li>
+        </ul>
+        <a href="#cta" class="btn btn-outline">Empezar gratis</a>
+      </article>
+      <article class="price-card feat">
+        <div class="price-badge-bar">Más elegido</div>
+        <div class="price-name">Profesional</div>
+        <div class="price-amount"><span class="num">59</span><span class="cur">&#8364;</span><span class="per">/mes</span></div>
+        <div class="price-sub">Para empresas de reforma</div>
+        <ul class="price-list">
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Todo lo del plan Basico</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>IA completa &middot; voz + sugerencias</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Control materiales OCR</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Plan de obra con etapas</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Sugerencias de precio por margen</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Acta de finalizacion</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary btn-magnetic">Empezar gratis<svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </article>
+      <article class="price-card">
+        <div class="price-name">Empresa</div>
+        <div class="price-amount"><span class="custom">A medida</span></div>
+        <div class="price-sub">Para equipos grandes</div>
+        <ul class="price-list">
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Todo lo del plan Profesional</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Multiples usuarios</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Subdominio personalizado</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Integracion contabilidad</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Onboarding personalizado</li>
+          <li class="yes"><svg aria-hidden="true"><use href="#i-check"/></svg>Soporte prioritario</li>
+        </ul>
+        <a href="#cta" class="btn btn-outline">Hablar con ventas</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq" class="sec-dark">
+  <span class="section-num">— 10 —</span>
+  <div class="wrap">
+    <header class="section-head" style="text-align:center;">
+      <div class="eyebrow t-label reveal-up">Preguntas frecuentes</div>
+      <h2 class="t-display-lg reveal-up">LO QUE SUELES<br><span class="accent">PREGUNTAR</span></h2>
+    </header>
+    <div class="faq-wrap">
+      <div class="faq-item"><div class="faq-q"><span>¿Necesito instalar algo?</span><span class="faq-toggle"><svg aria-hidden="true"><use href="#i-plus"/></svg></span></div><div class="faq-a"><div class="faq-a-inner">No. Funciona en el navegador desde cualquier dispositivo con conexion. Ordenador, tablet o movil — siempre tienes tus presupuestos contigo.</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span>¿La firma es legal en España?</span><span class="faq-toggle"><svg aria-hidden="true"><use href="#i-plus"/></svg></span></div><div class="faq-a"><div class="faq-a-inner">Si, cumple el reglamento eIDAS europeo. La firma queda vinculada a la identidad del cliente mediante verificacion por SMS con plena validez legal ante tribunales.</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span>¿Puedo importar mis partidas?</span><span class="faq-toggle"><svg aria-hidden="true"><use href="#i-plus"/></svg></span></div><div class="faq-a"><div class="faq-a-inner">Sí. Aceptamos formato BC3 estándar de construcción y puedes crear tu biblioteca propia de partidas reutilizables desde cero o importándolas.</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span>¿Es compatible con Presto y CYPE?</span><span class="faq-toggle"><svg aria-hidden="true"><use href="#i-plus"/></svg></span></div><div class="faq-a"><div class="faq-a-inner">Sí. Puedes importar tus bases de precios en formato BC3 estándar, el mismo que usa Presto, CYPE y las bases oficiales de las Comunidades Autónomas. También buscamos en bases como BCCA, BEDEC y BCAM directamente desde la app sin descargar nada.</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span>¿Funciona para aparejadores y constructores?</span><span class="faq-toggle"><svg aria-hidden="true"><use href="#i-plus"/></svg></span></div><div class="faq-a"><div class="faq-a-inner">Sí. El sistema soporta precio descompuesto completo: material + mano de obra + maquinaria + medios auxiliares + beneficio industrial. Compatible con el formato de certificaciones y actas de recepción de obra.</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span>¿Qué pasa si cancelo?</span><span class="faq-toggle"><svg aria-hidden="true"><use href="#i-plus"/></svg></span></div><div class="faq-a"><div class="faq-a-inner">Te damos 30 dias de acceso completo y puedes exportar todos tus datos en PDF y CSV. Sin letra pequena, sin retenciones.</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span>¿La IA funciona en mi sector?</span><span class="faq-toggle"><svg aria-hidden="true"><use href="#i-plus"/></svg></span></div><div class="faq-a"><div class="faq-a-inner">Especializada en construccion y reforma en Espana. Configura tu gremio (fontaneria, electricidad, reforma integral, etc.) y la IA aprende tus partidas habituales.</div></div></div>
+      <div class="faq-item"><div class="faq-q"><span>¿Hay permanencia?</span><span class="faq-toggle"><svg aria-hidden="true"><use href="#i-plus"/></svg></span></div><div class="faq-a"><div class="faq-a-inner">Ninguna. Mes a mes, cancela cuando quieras desde tu panel. Sin llamadas, sin excusas, sin complicaciones.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA FINAL (FIX 2) ═══ -->
+<section class="cta-final" id="cta">
+  <div class="cta-glow" id="ctaGlow" aria-hidden="true"></div>
+  <div class="wrap">
+    <h2 class="reveal-up">EL PROXIMO<br><span class="accent">PRESUPUESTO</span><br>EN 15 MIN</h2>
+    <p class="sub reveal-up">Más de 200 profesionales ya ahorran 3 horas por presupuesto. El siguiente puedes ser tú.</p>
+
+    <!-- Micro-guarantees -->
+    <div class="cta-guarantees-grid reveal-up">
+      <div class="cta-guarantee-card">
+        <svg aria-hidden="true"><use href="#i-lock"/></svg>
+        <span>30 dias gratis. Sin tarjeta.</span>
+      </div>
+      <div class="cta-guarantee-card">
+        <svg aria-hidden="true"><use href="#i-calendar"/></svg>
+        <span>Cancela cuando quieras.</span>
+      </div>
+      <div class="cta-guarantee-card">
+        <svg aria-hidden="true"><use href="#i-card"/></svg>
+        <span>Datos exportables siempre.</span>
+      </div>
+    </div>
+
+    <!-- Two-column CTA options -->
+    <div class="cta-options-grid reveal-up">
+      <!-- LEFT: Immediate trial -->
+      <div class="cta-option cta-option-left">
+        <span class="cta-option-badge">MÁS RÁPIDO</span>
+        <h3>Empieza ahora mismo</h3>
+        <p class="cta-option-desc">Acceso completo en 2 minutos. Configura tu primera partida en el acto.</p>
+        <form class="cta-form-inline" id="ctaForm" onsubmit="return false;">
+          <input type="text" placeholder="Tu nombre" id="ctaName" aria-label="Tu nombre" required>
+          <input type="email" placeholder="tu@email.com" id="ctaEmail" aria-label="Tu email" required>
+          <button type="submit" class="btn btn-primary btn-magnetic" id="ctaSubmit">
+            Empezar gratis &rarr;
+          </button>
+        </form>
+        <div class="cta-confirmation" id="ctaConfirmation">
+          <div class="check-icon"><svg aria-hidden="true"><use href="#i-check-c"/></svg></div>
+          <h4 id="ctaConfirmTitle">Perfecto!</h4>
+          <p>Recibiras el acceso en tu email en minutos.</p>
+          <a href="#demo" class="explore-link">Mientras tanto, explora la demo de abajo &rarr;</a>
+        </div>
+      </div>
+
+      <!-- SEPARATOR -->
+      <div class="cta-separator" aria-hidden="true">
+        <div class="cta-separator-line"></div>
+        <div class="cta-separator-circle">o</div>
+        <div class="cta-separator-line"></div>
+      </div>
+
+      <!-- RIGHT: Talk first -->
+      <div class="cta-option cta-option-right">
+        <h3>Prefiero que me lo expliquen</h3>
+        <p class="cta-option-desc">Cuentanos tu caso y te mostramos como encaja en tu forma de trabajar.</p>
+        <a href="https://wa.me/34XXXXXXXXX?text=Hola%2C%20me%20interesa%20el%20software%20de%20presupuestos%20de%20OpsPilot" target="_blank" rel="noopener" class="cta-wa-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escribenos por WhatsApp
+        </a>
+        <a href="mailto:hola@opspilot.es?subject=Interés%20en%20OpsPilot%20Presupuestador&body=Hola%2C%20me%20gustaría%20saber%20más%20sobre%20el%20software%20de%20presupuestos." class="cta-email-btn">
+          <svg aria-hidden="true"><use href="#i-envelope"/></svg>
+          Enviarnos un mensaje
+        </a>
+        <div class="cta-option-small">Respondemos en menos de 2 horas en horario laboral</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <a href="#" class="logo"><span class="logo-dot"></span>OPSPILOT</a>
+      <ul class="footer-links">
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Terminos</a></li>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter"><svg aria-hidden="true"><use href="#i-tw"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-li"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+      </div>
+      <span class="footer-year">&copy; 2026 OPSPILOT</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load', () => {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.config({ nullTargetWarn: false });
+  ScrollTrigger.defaults({ toggleActions: 'play none none none', once: true });
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = matchMedia('(hover: none)').matches || innerWidth < 900;
+
+  /* ═══ GRAIN ═══ */
+  const canvas = document.getElementById('grain');
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  function grainResize(){ canvas.width = Math.min(innerWidth, 800); canvas.height = Math.min(innerHeight, 600); }
+  function grainTick(){
+    const img = ctx.createImageData(canvas.width, canvas.height);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4){ const v = (Math.random()*255)|0; d[i]=d[i+1]=d[i+2]=v; d[i+3]=255; }
+    ctx.putImageData(img, 0, 0);
+  }
+  canvas.style.width = '100%'; canvas.style.height = '100%';
+  grainResize(); addEventListener('resize', grainResize);
+  let grainF = 0;
+  (function loop(){ if (++grainF % 2 === 0) grainTick(); requestAnimationFrame(loop); })();
+
+  /* ═══ LOADER ═══ */
+  const loaderTl = gsap.timeline({
+    onComplete(){ document.getElementById('loader').remove(); }
+  });
+  loaderTl
+    .set('body', { overflow: 'hidden' })
+    .from('#loader-text', { opacity: 0, y: 10, duration: 0.4, ease: 'power2.out' })
+    .to({}, { duration: 0.35 })
+    .to('#loader-top', { yPercent: -100, duration: 0.7, ease: 'power3.inOut' })
+    .to('#loader-bottom', { yPercent: 100, duration: 0.7, ease: 'power3.inOut' }, '<')
+    .set('body', { overflow: '' });
+
+  /* ═══ CURSOR (FIX 1) ═══ */
+  if (!isTouch){
+    const c = document.getElementById('c');
+    const cf = document.getElementById('cf');
+    let mx = innerWidth/2, my = innerHeight/2, fx = mx, fy = my;
+    addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    gsap.ticker.add(() => {
+      fx += (mx - fx) * 0.10;
+      fy += (my - fy) * 0.10;
+      gsap.set(c, { x: mx - 3, y: my - 3 });
+      gsap.set(cf, { x: fx - 16, y: fy - 16 });
+    });
+    /* GSAP-driven hover animations */
+    document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        gsap.to(c, { scale: 0, duration: 0.2 });
+        gsap.to(cf, { scale: 1.8, borderColor: 'var(--gold)', background: 'var(--gold-dim)', duration: 0.3 });
+      });
+      el.addEventListener('mouseleave', () => {
+        gsap.to(c, { scale: 1, duration: 0.2 });
+        gsap.to(cf, { scale: 1, borderColor: 'var(--gold-border)', background: 'transparent', duration: 0.6, ease: 'elastic.out(1,0.5)' });
+      });
+    });
+    document.querySelectorAll('.btn-primary').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        gsap.to(cf, { scale: 2.2, background: 'rgba(232,160,32,0.15)', borderColor: 'var(--gold)', duration: 0.3 });
+      });
+      el.addEventListener('mouseleave', () => {
+        gsap.to(c, { scale: 1, duration: 0.2 });
+        gsap.to(cf, { scale: 1, borderColor: 'var(--gold-border)', background: 'transparent', duration: 0.6, ease: 'elastic.out(1,0.5)' });
+      });
+    });
+  }
+
+  /* ═══ HERO TIMELINE ═══ */
+  const heroTl = gsap.timeline({ delay: 1.3 });
+  heroTl
+    .from('.hero-eyebrow', { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' })
+    .from('.hero h1 .line', { opacity: 0, y: 60, skewY: 3, stagger: 0.08, duration: 0.9, ease: 'power4.out' }, '-=0.2')
+    .from('.hero-rule', { scaleX: 0, transformOrigin: 'left center', duration: 1.2, ease: 'power3.out' }, '-=0.7')
+    .from('.hero-body', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, '-=0.9')
+    .from('.hero-cta-group', { opacity: 0, y: 16, duration: 0.5, ease: 'power2.out' }, '-=0.4')
+    .from('.hero-stats-item', { opacity: 0, y: 12, stagger: 0.1, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+    .from('.hero-stats-divider', { scaleY: 0, duration: 0.4, ease: 'power2.out' }, '<')
+    .from('.hero-visual-grid', { opacity: 0, duration: 1, ease: 'power2.out' }, '-=1.4')
+    .from('.screen-primary', { opacity: 0, x: 80, rotation: 2, duration: 1.1, ease: 'power3.out' }, '-=1.2')
+    .from('.screen-secondary', { opacity: 0, x: -40, y: 30, duration: 0.8, ease: 'back.out(1.3)' }, '-=0.7')
+    .from('.screen-tertiary', { opacity: 0, scale: 0.88, y: 20, duration: 0.7, ease: 'back.out(1.5)' }, '-=0.5');
+
+  /* ═══ FLOATING SCREENS ═══ */
+  if (!reduceMotion){
+    gsap.to('.screen-primary', { y: -14, rotation: -0.5, duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('.screen-secondary', { y: -10, rotation: 0.8, duration: 5.5, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.2 });
+    gsap.to('.screen-tertiary', { y: -8, rotation: -1, duration: 3.8, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 2.4 });
+  }
+
+  /* ═══ ACTIVE STEP GLOW ═══ */
+  gsap.to('.step-active .step-node', {
+    boxShadow: '0 0 0 10px rgba(232,160,32,0.12)',
+    duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1
+  });
+
+  /* ═══ REVEALS ═══ */
+  function reveal(sel, vars){
+    gsap.utils.toArray(sel).forEach((el, i) => {
+      gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 88%' }, ...vars, delay: i * 0.04 });
+    });
+  }
+  reveal('.reveal-up', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out' });
+  reveal('.reveal-left', { opacity: 0, x: -50, duration: 0.9, ease: 'power3.out' });
+  reveal('.reveal-right', { opacity: 0, x: 50, duration: 0.9, ease: 'power3.out' });
+  reveal('.reveal-scale', { opacity: 0, scale: 0.94, duration: 0.8, ease: 'power2.out' });
+
+  /* ═══ STAGGER GRIDS ═══ */
+  gsap.utils.toArray('[data-stagger]').forEach(grid => {
+    gsap.from(grid.children, {
+      scrollTrigger: { trigger: grid, start: 'top 82%' },
+      opacity: 0, y: 30, stagger: { each: 0.10, ease: 'power1.inOut' },
+      duration: 0.75, ease: 'power2.out'
+    });
+  });
+
+  /* ═══ TIMELINE DRAW ═══ */
+  gsap.to('.timeline-line', {
+    strokeDashoffset: 0,
+    duration: 1.8, ease: 'power2.inOut',
+    scrollTrigger: { trigger: '.steps-section', start: 'top 70%' }
+  });
+
+  /* ═══ COUNTERS ═══ */
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseFloat(el.dataset.value);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const obj = { val: 0 };
+    ScrollTrigger.create({
+      trigger: el, start: 'top 92%', once: true,
+      onEnter: () => gsap.to(obj, {
+        val: target, duration: 1.8, ease: 'power2.out',
+        snap: { val: target % 1 === 0 ? 1 : 0.1 },
+        onUpdate(){
+          const v = target % 1 === 0 ? Math.round(obj.val) : obj.val.toFixed(1);
+          el.textContent = prefix + v + suffix;
+        }
+      })
+    });
+  });
+
+  /* ═══ PARALLAX HERO BG ═══ */
+  gsap.to('.hero-bg-grid', { yPercent: 25, ease: 'none', scrollTrigger: { trigger: '.hero', scrub: 0.8 } });
+  gsap.to('.hero-bg-glow', { yPercent: 40, ease: 'none', scrollTrigger: { trigger: '.hero', scrub: 1.2 } });
+  gsap.to('.hero-visual-grid', { yPercent: -15, ease: 'none', scrollTrigger: { trigger: '.hero', scrub: 1 } });
+
+
+  /* ═══ NAV SCROLL ═══ */
+  ScrollTrigger.create({
+    start: 'top -60px',
+    onEnter: () => gsap.to('#nav', { backgroundColor: 'rgba(8,8,8,0.92)', backdropFilter: 'blur(24px)', webkitBackdropFilter: 'blur(24px)', boxShadow: '0 1px 0 rgba(232,160,32,0.12)', paddingTop: 14, paddingBottom: 14, duration: 0.4 }),
+    onLeaveBack: () => gsap.to('#nav', { backgroundColor: 'rgba(8,8,8,0)', boxShadow: 'none', paddingTop: 20, paddingBottom: 20, duration: 0.4 })
+  });
+
+  /* ═══ MAGNETIC BUTTONS ═══ */
+  if (!isTouch){
+    document.querySelectorAll('.btn-magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width/2) * 0.25;
+        const y = (e.clientY - r.top - r.height/2) * 0.25;
+        gsap.to(btn, { x, y, duration: 0.4, ease: 'power2.out' });
+      });
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1,0.4)' });
+      });
+    });
+  }
+
+  /* ═══ HOVER LIFTS ═══ */
+  document.querySelectorAll('.pain-card, .tst-card, .price-card:not(.feat)').forEach(card => {
+    card.addEventListener('mouseenter', () => gsap.to(card, { y: -6, duration: 0.35, ease: 'power2.out' }));
+    card.addEventListener('mouseleave', () => gsap.to(card, { y: 0, duration: 0.35, ease: 'power2.out' }));
+  });
+
+  /* ═══ FAQ ACCORDION ═══ */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const a = item.querySelector('.faq-a');
+    const toggle = item.querySelector('.faq-toggle svg');
+    item.addEventListener('click', () => {
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        if (o !== item){
+          o.classList.remove('open');
+          gsap.to(o.querySelector('.faq-a'), { height: 0, opacity: 0, duration: 0.35, ease: 'power2.in' });
+          gsap.to(o.querySelector('.faq-toggle svg'), { rotation: 0, duration: 0.3, ease: 'power2.out' });
+        }
+      });
+      if (open){
+        item.classList.remove('open');
+        gsap.to(a, { height: 0, opacity: 0, duration: 0.35, ease: 'power2.in' });
+        gsap.to(toggle, { rotation: 0, duration: 0.3, ease: 'power2.out' });
+      } else {
+        item.classList.add('open');
+        gsap.set(a, { height: 'auto' });
+        gsap.from(a, { height: 0, opacity: 0, duration: 0.45, ease: 'power2.out' });
+        gsap.to(toggle, { rotation: 45, duration: 0.35, ease: 'back.out(2)' });
+      }
+    });
+  });
+
+  /* ═══ CTA GLOW PARALLAX ═══ */
+  const ctaGlow = document.getElementById('ctaGlow');
+  if (ctaGlow && !isTouch){
+    const cta = document.querySelector('.cta-final');
+    cta.addEventListener('mousemove', e => {
+      const r = cta.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width - 0.5) * 60;
+      const y = ((e.clientY - r.top) / r.height - 0.5) * 60;
+      gsap.to(ctaGlow, { x, y, duration: 1.2, ease: 'power2.out' });
+    });
+  }
+
+  /* ═══ CTA FORM SUBMIT (FIX 2) ═══ */
+  const ctaForm = document.getElementById('ctaForm');
+  const ctaConfirmation = document.getElementById('ctaConfirmation');
+  if (ctaForm){
+    document.getElementById('ctaSubmit').addEventListener('click', () => {
+      const name = document.getElementById('ctaName').value.trim();
+      const email = document.getElementById('ctaEmail').value.trim();
+      if (!name || !email) return;
+      gsap.to(ctaForm, {
+        opacity: 0, scale: 0.95, duration: 0.3,
+        onComplete: () => {
+          ctaForm.style.display = 'none';
+          ctaConfirmation.style.display = 'block';
+          document.getElementById('ctaConfirmTitle').textContent = 'Perfecto, ' + name + '!';
+          gsap.from(ctaConfirmation, { scale: 0.8, opacity: 0, duration: 0.5, ease: 'back.out(1.5)' });
+        }
+      });
+    });
+  }
+
+  /* ═══ INTERACTIVE DEMO (4-ACT FLOW) ═══ */
+  (function() {
+    let currentAct = 1;
+    let autoTimer = null;
+    let autoProgTween = null;
+    let demoStarted = false;
+    const AUTO_DELAY = 12000;
+    const hints = {
+      1: '→ Ahora revisa el presupuesto',
+      2: '→ El cliente recibirá el link para firmar',
+      3: '→ Ahora sigue tu obra desde el portal',
+      4: '✓ Has visto el flujo completo'
+    };
+
+    function formatES(n) {
+      return n.toLocaleString('es-ES', { maximumFractionDigits: 0 }) + '€';
+    }
+
+    /* ---- TAB SWITCHING ---- */
+    function switchAct(act, skipAnim) {
+      if (act === currentAct && demoStarted) return;
+      clearAutoAdvance();
+      const oldEl = document.getElementById('demoAct' + currentAct);
+      const newEl = document.getElementById('demoAct' + act);
+      if (!oldEl || !newEl) return;
+
+      /* Tabs */
+      document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+      const activeTab = document.querySelector('.demo-tab[data-act="' + act + '"]');
+      if (activeTab) activeTab.classList.add('active');
+
+      /* Transition */
+      if (!skipAnim && demoStarted) {
+        gsap.to(oldEl, { opacity: 0, scale: 0.97, duration: 0.35, ease: 'power2.in', onComplete: function() {
+          oldEl.classList.remove('active');
+          oldEl.style.display = 'none';
+          newEl.style.display = 'flex';
+          newEl.classList.add('active');
+          gsap.fromTo(newEl, { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' });
+        }});
+      } else {
+        document.querySelectorAll('.demo-act').forEach(a => { a.classList.remove('active'); a.style.display = 'none'; a.style.opacity = 0; });
+        newEl.style.display = 'flex';
+        newEl.classList.add('active');
+        gsap.to(newEl, { opacity: 1, scale: 1, duration: 0.01 });
+      }
+
+      currentAct = act;
+      document.getElementById('demoHint').textContent = hints[act] || '';
+
+      /* Run act animation */
+      setTimeout(function() { runAct(act); }, skipAnim ? 100 : 500);
+
+      /* Auto-advance (not on act 4) */
+      if (act < 4) startAutoAdvance(act);
+    }
+
+    function startAutoAdvance(act) {
+      clearAutoAdvance();
+      const progBar = document.getElementById('tabProg' + act);
+      if (progBar) {
+        progBar.style.width = '0%';
+        autoProgTween = gsap.to(progBar, { width: '100%', duration: AUTO_DELAY / 1000, ease: 'none' });
+      }
+      autoTimer = setTimeout(function() { switchAct(act + 1); }, AUTO_DELAY);
+    }
+
+    function clearAutoAdvance() {
+      clearTimeout(autoTimer);
+      if (autoProgTween) autoProgTween.kill();
+      document.querySelectorAll('.demo-tab-progress').forEach(function(p) { p.style.width = '0%'; });
+    }
+
+    /* Tab clicks */
+    document.querySelectorAll('.demo-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() { switchAct(parseInt(tab.dataset.act)); });
+    });
+
+    /* ---- ACT 01: DICTAR OBRA ---- */
+    let act01Played = false;
+    function runAct1() {
+      if (act01Played) { act01Played = false; /* allow replay */ }
+      act01Played = true;
+      const mic = document.getElementById('act01Mic');
+      const micLabel = document.getElementById('act01MicLabel');
+      const viz = document.getElementById('act01Viz');
+      const dictation = document.getElementById('act01Dictation');
+      const processing = document.getElementById('act01Processing');
+      const itemsWrap = document.getElementById('act01Items');
+      const totalWrap = document.getElementById('act01Total');
+      const totalVal = document.getElementById('act01TotalVal');
+      const placeholder = document.getElementById('act01Placeholder');
+
+      /* Reset */
+      mic.classList.remove('recording');
+      viz.classList.remove('visible');
+      viz.innerHTML = '';
+      dictation.textContent = '';
+      processing.classList.remove('visible');
+      itemsWrap.innerHTML = '';
+      totalWrap.style.opacity = 0;
+      totalVal.textContent = '0€';
+      placeholder.style.display = 'block';
+      micLabel.textContent = 'Mantén pulsado para dictar';
+      ['ctx01Evt1','ctx01Evt2','ctx01Evt3','ctx01Evt4','ctx01Evt5'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+      });
+      document.getElementById('ctx01Badge').classList.remove('visible');
+
+      /* Build visualizer bars */
+      for (var b = 0; b < 20; b++) {
+        var bar = document.createElement('div');
+        bar.className = 'act01-vbar';
+        viz.appendChild(bar);
+      }
+
+      /* Mic pulse */
+      gsap.to(mic, { scale: 1.08, duration: 0.6, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+
+      /* PHASE 1→2: Start recording at 2s */
+      setTimeout(function() {
+        placeholder.style.display = 'none';
+        mic.classList.add('recording');
+        micLabel.textContent = 'Escuchando...';
+        viz.classList.add('visible');
+        document.getElementById('ctx01Evt1').classList.add('active');
+
+        /* Animate bars */
+        var vizBars = viz.querySelectorAll('.act01-vbar');
+        var vizInterval = setInterval(function() {
+          vizBars.forEach(function(b) {
+            gsap.to(b, { height: Math.random() * 20 + 4, duration: 0.15 });
+          });
+        }, 150);
+
+        /* Typewriter */
+        var text = 'quiero un baño completo, demolición de los azulejos actuales, alicatado nuevo porcelánico 60x60, cambio de sanitarios y toda la fontanería...';
+        var charIdx = 0;
+        var typeInterval = setInterval(function() {
+          if (charIdx < text.length) {
+            dictation.textContent += text[charIdx];
+            charIdx++;
+          } else {
+            clearInterval(typeInterval);
+          }
+        }, 35);
+
+        /* PHASE 2→3: After 3s of dictation */
+        setTimeout(function() {
+          clearInterval(vizInterval);
+          mic.classList.remove('recording');
+          viz.classList.remove('visible');
+          gsap.to(dictation, { opacity: 0, duration: 0.4 });
+          document.getElementById('ctx01Evt2').classList.add('active');
+
+          /* Show spinner */
+          processing.classList.add('visible');
+
+          /* After 1.5s: show items */
+          setTimeout(function() {
+            processing.classList.remove('visible');
+            document.getElementById('ctx01Evt3').classList.add('active');
+            document.getElementById('ctx01Evt4').classList.add('active');
+
+            var items = [
+              { name: 'Demolición y retirada escombros', detail: '12 m² · IA sugerida', price: '480€' },
+              { name: 'Alicatado porcelánico 60×60', detail: '22 m² · 11h MO', price: '1.960€' },
+              { name: 'Cambio completo sanitarios', detail: '1 ud · Kit completo', price: '1.240€' },
+              { name: 'Instalación fontanería', detail: '1 ud · 8h MO', price: '890€' },
+              { name: 'Pintura interior baño', detail: '18 m² · 2 manos', price: '540€' }
+            ];
+
+            items.forEach(function(item, i) {
+              var div = document.createElement('div');
+              div.className = 'act01-item';
+              div.innerHTML = '<div class="act01-item-left"><span class="act01-item-name">' + item.name + '</span><span class="act01-item-detail">' + item.detail + '</span></div><span class="act01-item-price">' + item.price + '</span>';
+              itemsWrap.appendChild(div);
+              gsap.fromTo(div, { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: i * 0.4, ease: 'power3.out' });
+            });
+
+            /* Total counter */
+            setTimeout(function() {
+              totalWrap.style.opacity = 1;
+              gsap.fromTo(totalWrap, { opacity: 0 }, { opacity: 1, duration: 0.4 });
+              var counter = { val: 0 };
+              gsap.to(counter, { val: 5110, duration: 0.8, ease: 'power2.out', onUpdate: function() {
+                totalVal.textContent = formatES(Math.round(counter.val));
+              }});
+              document.getElementById('ctx01Evt5').classList.add('active');
+              document.getElementById('ctx01Badge').classList.add('visible');
+            }, 2200);
+
+          }, 1500);
+        }, 3000);
+      }, 2000);
+    }
+
+    /* ---- ACT 02: PRESUPUESTO ---- */
+    function runAct2() {
+      recalcAct02();
+      /* Animate items entrance */
+      document.querySelectorAll('.act02-item').forEach(function(item, i) {
+        gsap.fromTo(item, { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, delay: i * 0.12, ease: 'power3.out' });
+      });
+    }
+
+    function recalcAct02() {
+      var subtotal = 0;
+      document.querySelectorAll('.act02-item').forEach(function(row) {
+        var qtyInput = row.querySelector('.act02-item-qty');
+        var totalEl = row.querySelector('.act02-item-total');
+        if (!qtyInput || !totalEl) return;
+        var qty = parseFloat(qtyInput.value) || 0;
+        var base = parseFloat(qtyInput.dataset.base) || 0;
+        var rowTotal = qty * base;
+        subtotal += rowTotal;
+        totalEl.textContent = formatES(Math.round(rowTotal));
+      });
+      var iva = subtotal * 0.21;
+      var grand = subtotal + iva;
+      var mo = subtotal * 0.44;
+      var mat = subtotal * 0.39;
+      var misc = subtotal * 0.17;
+      var maxBar = Math.max(mo, mat, misc, 1);
+
+      var act02Sub = document.getElementById('act02Sub');
+      var act02Iva = document.getElementById('act02Iva');
+      var act02Grand = document.getElementById('act02Grand');
+      if (act02Sub) act02Sub.textContent = formatES(Math.round(subtotal));
+      if (act02Iva) act02Iva.textContent = formatES(Math.round(iva));
+      if (act02Grand) act02Grand.textContent = formatES(Math.round(grand));
+
+      var barMo = document.getElementById('act02BarMo');
+      var barMat = document.getElementById('act02BarMat');
+      var barMisc = document.getElementById('act02BarMisc');
+      if (barMo) gsap.to(barMo, { width: (mo / maxBar * 100) + '%', duration: 0.5 });
+      if (barMat) gsap.to(barMat, { width: (mat / maxBar * 100) + '%', duration: 0.5 });
+      if (barMisc) gsap.to(barMisc, { width: (misc / maxBar * 100) + '%', duration: 0.5 });
+
+      var valMo = document.getElementById('act02ValMo');
+      var valMat = document.getElementById('act02ValMat');
+      var valMisc = document.getElementById('act02ValMisc');
+      if (valMo) valMo.textContent = formatES(Math.round(mo));
+      if (valMat) valMat.textContent = formatES(Math.round(mat));
+      if (valMisc) valMisc.textContent = formatES(Math.round(misc));
+    }
+
+    /* Quantity input change */
+    document.getElementById('act02Items').addEventListener('input', function(e) {
+      if (e.target.classList.contains('act02-item-qty')) {
+        recalcAct02();
+        /* Show modified badge */
+        var row = e.target.closest('.act02-item');
+        var existing = row.querySelector('.act02-modified');
+        if (!existing) {
+          var badge = document.createElement('span');
+          badge.className = 'act02-modified';
+          badge.textContent = 'Modificado';
+          row.querySelector('.act02-item-total').after(badge);
+          gsap.to(badge, { opacity: 1, duration: 0.3 });
+          setTimeout(function() { gsap.to(badge, { opacity: 0, duration: 0.5, onComplete: function() { badge.remove(); } }); }, 2000);
+        }
+      }
+    });
+
+    /* Add row */
+    document.getElementById('act02AddBtn').addEventListener('click', function() {
+      var newRow = document.createElement('div');
+      newRow.className = 'act02-item';
+      newRow.innerHTML = '<span class="act02-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>' +
+        '<span class="act02-item-info"><input type="text" placeholder="Nombre partida" style="background:transparent;border:none;border-bottom:1px solid var(--ink-4);color:var(--cream);font-family:var(--body);font-size:12px;padding:2px 0;outline:none;width:100%"></span>' +
+        '<input class="act02-item-qty" type="number" value="1" min="1" data-base="100">' +
+        '<span class="act02-item-unit">ud</span>' +
+        '<span class="act02-item-total">100€</span>' +
+        '<button class="act02-item-del">×</button>';
+      document.getElementById('act02Items').appendChild(newRow);
+      gsap.from(newRow, { height: 0, opacity: 0, duration: 0.4, ease: 'power2.out' });
+      recalcAct02();
+    });
+
+    /* Delete row */
+    document.getElementById('act02Items').addEventListener('click', function(e) {
+      if (e.target.classList.contains('act02-item-del')) {
+        var row = e.target.closest('.act02-item');
+        gsap.to(row, { opacity: 0, height: 0, duration: 0.3, onComplete: function() { row.remove(); recalcAct02(); }});
+      }
+    });
+
+    /* PDF button */
+    document.getElementById('act02PdfBtn').addEventListener('click', function() {
+      var prog = document.getElementById('act02PdfProgress');
+      var fill = document.getElementById('act02PdfFill');
+      var done = document.getElementById('act02PdfDone');
+      prog.style.display = 'block';
+      fill.style.width = '0%';
+      done.style.display = 'none';
+      setTimeout(function() { fill.style.width = '100%'; }, 50);
+      setTimeout(function() {
+        prog.style.display = 'none';
+        done.style.display = 'flex';
+      }, 1600);
+    });
+
+    /* Send button → go to Act 03 */
+    document.getElementById('act02SendBtn').addEventListener('click', function() { switchAct(3); });
+
+    /* ---- ACT 03: FIRMA DIGITAL ---- */
+    function runAct3() {
+      /* Reset to lock screen */
+      document.getElementById('act03Lock').style.display = 'block';
+      document.getElementById('act03Budget').style.display = 'none';
+      document.getElementById('act03Signature').style.display = 'none';
+      document.getElementById('act03Confirm').style.display = 'none';
+      var sigPath = document.getElementById('act03SigPath');
+      if (sigPath) { sigPath.style.strokeDashoffset = '300'; }
+      var check = document.getElementById('act03Check');
+      if (check) check.style.transform = 'scale(0)';
+    }
+
+    /* View budget button */
+    document.getElementById('act03ViewBtn').addEventListener('click', function() {
+      gsap.to(document.getElementById('act03Lock'), { opacity: 0, duration: 0.3, onComplete: function() {
+        document.getElementById('act03Lock').style.display = 'none';
+        document.getElementById('act03Budget').style.display = 'block';
+        gsap.fromTo(document.getElementById('act03Budget'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4 });
+      }});
+    });
+
+    /* Sign button */
+    document.getElementById('act03SignBtn').addEventListener('click', function() {
+      gsap.to(document.getElementById('act03Budget'), { opacity: 0, duration: 0.3, onComplete: function() {
+        document.getElementById('act03Budget').style.display = 'none';
+        document.getElementById('act03Signature').style.display = 'block';
+        gsap.fromTo(document.getElementById('act03Signature'), { opacity: 0 }, { opacity: 1, duration: 0.4 });
+      }});
+    });
+
+    /* Signature area click */
+    document.getElementById('act03SigArea').addEventListener('click', function() {
+      var placeholder = this.querySelector('.act03-sig-placeholder');
+      if (placeholder) placeholder.style.display = 'none';
+      var sigPath = document.getElementById('act03SigPath');
+      gsap.to(sigPath, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' });
+
+      setTimeout(function() {
+        document.getElementById('act03Confirm').style.display = 'block';
+        var check = document.getElementById('act03Check');
+        gsap.fromTo(check, { scale: 0 }, { scale: 1, duration: 0.5, ease: 'back.out(1.7)' });
+        /* Date */
+        var now = new Date();
+        var dateStr = now.toLocaleDateString('es-ES') + ' ' + now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('act03ConfirmText').textContent = 'Firmado digitalmente el ' + dateStr;
+      }, 1800);
+    });
+
+    /* ---- ACT 04: PORTAL DE OBRA ---- */
+    function runAct4() {
+      /* Progress bar */
+      var fill = document.getElementById('act04ProgFill');
+      var num = document.getElementById('act04ProgNum');
+      fill.style.width = '0%';
+      num.textContent = '0';
+      gsap.to(fill, { width: '65%', duration: 1.5, ease: 'power2.out' });
+      var counter = { val: 0 };
+      gsap.to(counter, { val: 65, duration: 1.5, ease: 'power2.out', onUpdate: function() {
+        num.textContent = Math.round(counter.val);
+      }});
+
+      /* Timeline line */
+      var tline = document.getElementById('act04TimeLine');
+      tline.style.height = '0%';
+      gsap.to(tline, { height: '60%', duration: 1.5, delay: 0.5, ease: 'power2.out' });
+    }
+
+    /* ---- ACT ROUTER ---- */
+    function runAct(act) {
+      switch(act) {
+        case 1: runAct1(); break;
+        case 2: runAct2(); break;
+        case 3: runAct3(); break;
+        case 4: runAct4(); break;
+      }
+    }
+
+    /* ---- SCROLL TRIGGER START ---- */
+    ScrollTrigger.create({
+      trigger: '#demo',
+      start: 'top 80%',
+      once: true,
+      onEnter: function() {
+        gsap.from('#demoShell', { opacity: 0, y: 40, duration: 0.9, ease: 'power3.out' });
+        setTimeout(function() {
+          demoStarted = true;
+          switchAct(1, true);
+        }, 2000);
+      }
+    });
+  })();
+});
+</script>
+</body>
+</html>
